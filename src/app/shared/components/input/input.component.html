@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-label>{{inputLabelTitle}}</mat-label>
+  <input matInput type="text" [(ngModel)]="inputValue" class="app-input" />
+  @if (inputValue) {
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="clearInput()">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field>

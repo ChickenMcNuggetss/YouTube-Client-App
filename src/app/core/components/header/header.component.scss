@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.header-form {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}

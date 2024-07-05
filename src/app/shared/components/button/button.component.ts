@@ -11,5 +11,4 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [MatButtonModule, MatDividerModule, MatIconModule],
 })
 export class ButtonComponent {
-  @Input() titleButton: string = ''
 }

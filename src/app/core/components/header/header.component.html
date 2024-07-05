@@ -1,2 +1,7 @@
-
-<app-button titleButton="Search"/>
+<div class="header">
+  <app-logo />
+  <form (submit)="$event.preventDefault()" class="header-form">
+    <app-input inputLabelTitle="Search" />
+    <app-button><span>Search</span></app-button>
+  </form>
+</div>
