@@ -1,7 +1,26 @@
-<div class="header">
-  <app-logo />
-  <form (submit)="$event.preventDefault()" class="header-form">
-    <app-input inputLabelTitle="Search" />
-    <app-button><span>Search</span></app-button>
-  </form>
-</div>
+<header class="header">
+  <div class="header-container">
+    <app-logo />
+    <div class="header-search-container">
+      <form (submit)="$event.preventDefault(); search()" class="header-form">
+        <app-input inputLabelTitle="Search" (valueChange)="onSearchValueChange($event)"/>
+        <app-button><span>Search</span></app-button>
+      </form>
+      <app-button (click)="toggleFilters()"><mat-icon>sort</mat-icon></app-button>
+    </div>
+    <div class="header-login-info">
+      <span>Username</span>
+      <mat-icon>account_circle</mat-icon>
+    </div>
+  </div>
+
+  <div *ngIf="isFiltersOpened" class="header-filters">
+    <span>Sort by:</span>
+    <app-button mat-button>date</app-button>
+    <app-button>count of views</app-button>
+    <div>
+      <span>by word or sentence:</span>
+      <app-input/>
+    </div>
+  </div>
+</header>

@@ -20,6 +20,8 @@
     "paths": {
       "@assets/*": ["./app/assets/*"],
       "@shared/*": ["./app/shared/*"],
+      "@features/*": ["./app/features/*"],
+      "@core/*": ["./app/core/*"],
     },
     "module": "ES2022",
     "useDefineForClassFields": false,

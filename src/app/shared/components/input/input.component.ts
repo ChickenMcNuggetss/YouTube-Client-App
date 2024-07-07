@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
@@ -13,11 +13,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatIconModule],
 })
 export class InputComponent {
+  inputValue: string = '';
   @Input() inputLabelTitle = ''
-  @Input() inputValue = '';
+  @Output() valueChange = new EventEmitter<string>();
 
-  clearInput() {
-    this.inputValue = ''
+  onInputChange() {
+    this.valueChange.emit(this.inputValue);
   }
 }
 
