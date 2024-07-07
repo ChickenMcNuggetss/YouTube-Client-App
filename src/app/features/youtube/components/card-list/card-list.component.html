@@ -1,3 +1,5 @@
-<div *ngFor="let result of searchService.sortedResults">
-  {{ result.snippet.title }}
+<div class="app-card-item-container">
+  @for (result of searchService.sortedResults; track result) {
+    <app-card-item [result]="result"></app-card-item>
+  }
 </div>

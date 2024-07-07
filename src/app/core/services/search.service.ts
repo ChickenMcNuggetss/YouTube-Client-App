@@ -16,7 +16,9 @@ export class SearchService {
       if (el.snippet.title.toLowerCase().includes(inputValue.toLowerCase())) return el;
       return;
     });
+    this.sortedResults = []
     this.sortedResults = [...res]
+    console.log(this.sortedResults);
     console.log(res);
   }
 

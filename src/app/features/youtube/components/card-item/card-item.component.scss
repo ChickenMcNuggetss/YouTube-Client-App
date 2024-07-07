@@ -1,0 +1,18 @@
+.app-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 25rem;
+  height: 30rem;
+}
+
+.video-statistics {
+  display: flex;
+  gap: 1rem;
+}
+
+.video-statistics-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
