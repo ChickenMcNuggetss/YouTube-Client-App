@@ -11,16 +11,16 @@ import { CardItemComponent } from '../card-item/card-item.component';
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',
 })
-export class CardListComponent {
+export class CardListComponent implements OnChanges {
   searchService = inject(SearchService);
-  listSearch: ResponseItem[] = [];
+  listSearch: ResponseItem[] = this.searchService.sortedResults;
 
-  сonstructor() {
-    this.listSearch = []
-    this.listSearch = this.searchService.sortedResults;
+  сonstructor() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+    if (changes['sortedResults']) {
+      this.listSearch = changes['sortedResults'].currentValue;
+    }
   }
-
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   this.searchService.sortedResults;
-  // }
 }

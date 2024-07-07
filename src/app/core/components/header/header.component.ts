@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgIf } from '@angular/common';
 import { SearchService } from 'app/core/services/search.service';
+import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ import { SearchService } from 'app/core/services/search.service';
     NgIf,
     MatButtonModule,
     MatChipsModule,
+    ButtonToggleComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
@@ -39,5 +41,9 @@ export class HeaderComponent {
   search() {
     if (this.searchValue.length === 0) return
     this.searchService.searchByTitle(this.searchValue);
+  }
+
+  sort(sortCriteria: string) {
+    this.searchService.sortBy(sortCriteria)
   }
 }

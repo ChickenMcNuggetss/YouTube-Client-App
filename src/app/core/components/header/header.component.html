@@ -3,10 +3,14 @@
     <app-logo />
     <div class="header-search-container">
       <form (submit)="$event.preventDefault(); search()" class="header-form">
-        <app-input inputLabelTitle="Search" (valueChange)="onSearchValueChange($event)"/>
+        <app-input
+          inputLabelTitle="Search"
+          (valueChange)="onSearchValueChange($event)" />
         <app-button><span>Search</span></app-button>
       </form>
-      <app-button (click)="toggleFilters()"><mat-icon>sort</mat-icon></app-button>
+      <app-button (click)="toggleFilters()"
+        ><mat-icon>sort</mat-icon></app-button
+      >
     </div>
     <div class="header-login-info">
       <span>Username</span>
@@ -16,11 +20,17 @@
 
   <div *ngIf="isFiltersOpened" class="header-filters">
     <span>Sort by:</span>
-    <app-button mat-button>date</app-button>
-    <app-button>count of views</app-button>
+    <app-button-toggle
+      firstButtonValue="date asc"
+      secondButtonValue="date desc"
+      (valueToggle)="sort($event)"></app-button-toggle>
+    <app-button-toggle
+      firstButtonValue="views asc"
+      secondButtonValue="views desc"
+      (valueToggle)="sort($event)"></app-button-toggle>
     <div>
       <span>by word or sentence:</span>
-      <app-input/>
+      <app-input />
     </div>
   </div>
 </header>

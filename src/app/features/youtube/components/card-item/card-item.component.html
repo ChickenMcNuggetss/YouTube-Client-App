@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="app-card">
+<mat-card appearance="outlined" class="app-card" [ngStyle]="{'border-bottom': borderColor}">
   <img mat-card-image [src]="result.snippet.thumbnails.maxres.url" [alt]="result.snippet.title">
   <mat-card-header>
     <mat-card-title>{{result.snippet.title}}</mat-card-title>

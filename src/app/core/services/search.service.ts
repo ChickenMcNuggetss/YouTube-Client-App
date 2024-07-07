@@ -16,28 +16,27 @@ export class SearchService {
       if (el.snippet.title.toLowerCase().includes(inputValue.toLowerCase())) return el;
       return;
     });
-    this.sortedResults = []
     this.sortedResults = [...res]
-    console.log(this.sortedResults);
-    console.log(res);
   }
 
-  public sortSearchResultsByViewDesc() {
-    return response.sort(
-      (a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
-    );
-  }
-
-  public sortSearchResultsByViewAsc() {
-    const res = response.sort(
-      (a, b) => Number(b.statistics.viewCount) - Number(a.statistics.viewCount)
-    );
-    console.log(res);
-  }
-
-  public sortSearchResultsByDateDesc() {
-    return response.sort(
-      (a, b) => Number(b.snippet.publishedAt) - Number(a.snippet.publishedAt)
-    );
+  public sortBy(sortCriteria: string) {
+    let sortOrder = 1;
+  
+    if (sortCriteria.includes('desc')) {
+      sortOrder = -1;
+    }
+  
+    const res = this.sortedResults.sort((a, b) => {
+      if (sortCriteria.includes('view')) {
+        return sortOrder * (Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
+      } else if (sortCriteria.includes('date')) {
+        const dateA = new Date(a.snippet.publishedAt).getTime();
+        const dateB = new Date(b.snippet.publishedAt).getTime();
+        return sortOrder * (dateB - dateA); 
+      }
+      return 0;
+    });
+  
+    this.sortedResults = [...res];
   }
 }
