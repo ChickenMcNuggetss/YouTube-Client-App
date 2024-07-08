@@ -22,13 +22,11 @@
       "@shared/*": ["./app/shared/*"],
       "@features/*": ["./app/features/*"],
       "@core/*": ["./app/core/*"],
+      "@interfaces/*": ["./app/interfaces/*"]
     },
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

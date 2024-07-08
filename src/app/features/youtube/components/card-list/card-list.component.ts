@@ -1,26 +1,16 @@
 import { NgFor } from '@angular/common';
-import { Component, OnChanges, SimpleChanges, inject } from '@angular/core';
-import { ResponseItem } from '@core/interfaces/response';
+import { Component, inject } from '@angular/core';
 import { SearchService } from '@core/services/search.service';
 import { CardItemComponent } from '../card-item/card-item.component';
+import { SortPipe } from '@features/youtube/pipes/sort.pipe';
 
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [NgFor, CardItemComponent],
+  imports: [NgFor, CardItemComponent, SortPipe],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss',
 })
-export class CardListComponent implements OnChanges {
-  searchService = inject(SearchService);
-  listSearch: ResponseItem[] = this.searchService.sortedResults;
-
-  сonstructor() {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
-    if (changes['sortedResults']) {
-      this.listSearch = changes['sortedResults'].currentValue;
-    }
-  }
+export class CardListComponent {
+  protected searchService = inject(SearchService);
 }

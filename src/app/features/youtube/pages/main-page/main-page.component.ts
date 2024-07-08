@@ -6,8 +6,6 @@ import { CardListComponent } from '@features/youtube/components/card-list/card-l
   standalone: true,
   imports: [CardListComponent],
   templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss'
+  styleUrl: './main-page.component.scss',
 })
-export class MainPageComponent {
-
-}
+export class MainPageComponent {}

@@ -8,7 +8,7 @@ import { MainPageComponent } from '@features/youtube/pages/main-page/main-page.c
   standalone: true,
   imports: [RouterOutlet, HeaderComponent, MainPageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'YouTube-Client-App';

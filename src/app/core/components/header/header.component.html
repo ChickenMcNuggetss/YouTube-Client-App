@@ -30,7 +30,7 @@
       (valueToggle)="sort($event)"></app-button-toggle>
     <div>
       <span>by word or sentence:</span>
-      <app-input />
+      <app-input (valueChange)="sortValueChange($event)"/>
     </div>
   </div>
 </header>

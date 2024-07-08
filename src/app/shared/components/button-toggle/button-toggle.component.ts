@@ -12,9 +12,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class ButtonToggleComponent {
   @Input() firstButtonValue: string = '';
   @Input() secondButtonValue: string = '';
-
   @Output() valueToggle = new EventEmitter<string>();
-  
   hideSingleSelectionIndicator = signal(false);
 
   toggleSingleSelectionIndicator() {
@@ -22,7 +20,6 @@ export class ButtonToggleComponent {
   }
 
   emitFirstValue() {
-    console.log('im first value', this.firstButtonValue)
     this.valueToggle.emit(this.firstButtonValue);
   }
 

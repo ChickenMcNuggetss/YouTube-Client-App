@@ -6,37 +6,45 @@ import { ResponseItem } from '../interfaces/response';
   providedIn: 'root',
 })
 export class SearchService {
-  sortedResults: ResponseItem[] = []
+  sortedResults: ResponseItem[] = [];
+  sortValue: string = '';
 
   constructor() {}
 
   public searchByTitle(inputValue: string) {
-    console.log(inputValue);
     const res = response.filter(el => {
-      if (el.snippet.title.toLowerCase().includes(inputValue.toLowerCase())) return el;
+      if (el.snippet.title.toLowerCase().includes(inputValue.toLowerCase()))
+        return el;
       return;
     });
-    this.sortedResults = [...res]
+    this.sortedResults = [...res];
   }
 
   public sortBy(sortCriteria: string) {
     let sortOrder = 1;
-  
+
     if (sortCriteria.includes('desc')) {
       sortOrder = -1;
     }
-  
+
     const res = this.sortedResults.sort((a, b) => {
       if (sortCriteria.includes('view')) {
-        return sortOrder * (Number(b.statistics.viewCount) - Number(a.statistics.viewCount));
+        return (
+          sortOrder *
+          (Number(b.statistics.viewCount) - Number(a.statistics.viewCount))
+        );
       } else if (sortCriteria.includes('date')) {
         const dateA = new Date(a.snippet.publishedAt).getTime();
         const dateB = new Date(b.snippet.publishedAt).getTime();
-        return sortOrder * (dateB - dateA); 
+        return sortOrder * (dateB - dateA);
       }
       return 0;
     });
-  
+
     this.sortedResults = [...res];
+  }
+
+  public setSortValue(value: string) {
+    this.sortValue = value;
   }
 }

@@ -27,7 +27,7 @@ import { ButtonToggleComponent } from '@shared/components/button-toggle/button-t
 })
 export class HeaderComponent {
   isFiltersOpened = false;
-  searchService = inject(SearchService);
+  protected searchService = inject(SearchService);
   searchValue: string = '';
 
   onSearchValueChange(value: string) {
@@ -39,11 +39,15 @@ export class HeaderComponent {
   }
 
   search() {
-    if (this.searchValue.length === 0) return
+    if (this.searchValue.length === 0) return;
     this.searchService.searchByTitle(this.searchValue);
   }
 
   sort(sortCriteria: string) {
-    this.searchService.sortBy(sortCriteria)
+    this.searchService.sortBy(sortCriteria);
+  }
+
+  sortValueChange(value: string) {
+    this.searchService.setSortValue(value)
   }
 }

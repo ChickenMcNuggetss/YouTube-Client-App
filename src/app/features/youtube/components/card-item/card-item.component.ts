@@ -12,17 +12,24 @@ const BORDER_BOTTOM = '4px solid ';
 @Component({
   selector: 'app-card-item',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, ButtonComponent, MatIconModule, NgStyle],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    ButtonComponent,
+    MatIconModule,
+    NgStyle,
+  ],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
-export class CardItemComponent implements OnInit{
-  @Input({required: true}) result!: ResponseItem;
+export class CardItemComponent implements OnInit {
+  @Input({ required: true }) result!: ResponseItem;
 
-  borderColor: string = ''
+  borderColor: string = '';
 
   ngOnInit() {
-    const difference = Date.now() - new Date(this.result.snippet.publishedAt).valueOf()
+    const difference =
+      Date.now() - new Date(this.result.snippet.publishedAt).valueOf();
     this.borderColor = BORDER_BOTTOM + chooseColor(difference);
   }
 }
