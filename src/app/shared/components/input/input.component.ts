@@ -20,7 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class InputComponent {
   inputValue: string = '';
-  @Input() inputLabelTitle = '';
+  @Input({required: true}) inputLabelTitle!: string;
   @Output() valueChange = new EventEmitter<string>();
 
   onInputChange() {

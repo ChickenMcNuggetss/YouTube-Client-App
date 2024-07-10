@@ -34,9 +34,9 @@ export class SearchService {
           (Number(b.statistics.viewCount) - Number(a.statistics.viewCount))
         );
       } else if (sortCriteria.includes('date')) {
-        const dateA = new Date(a.snippet.publishedAt).getTime();
-        const dateB = new Date(b.snippet.publishedAt).getTime();
-        return sortOrder * (dateB - dateA);
+        const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
+        const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
+        return sortOrder * (firstPublishDate - secondPublishDate);
       }
       return 0;
     });

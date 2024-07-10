@@ -10,8 +10,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
   styleUrl: './button-toggle.component.scss',
 })
 export class ButtonToggleComponent {
-  @Input() firstButtonValue: string = '';
-  @Input() secondButtonValue: string = '';
+  @Input({required: true}) firstButtonValue!: string;
+  @Input({required: true}) secondButtonValue!: string;
   @Output() valueToggle = new EventEmitter<string>();
   hideSingleSelectionIndicator = signal(false);
 
