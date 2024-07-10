@@ -1,20 +1,21 @@
+import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ButtonComponent } from '@shared/components/button/button.component';
-import { SvgLogo } from '@assets/logo/logo.component';
-import { InputComponent } from '@shared/components/input/input.component';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import { NgIf } from '@angular/common';
-import { SearchService } from 'app/core/services/search.service';
+import { MatIconModule } from '@angular/material/icon';
+import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
+import { InputComponent } from '@shared/components/input/input.component';
+import { SvgLogoComponent } from '@shared/components/logo/logo.component';
+import { SearchService } from 'app/core/services/search.service';
+import { SortingVariant } from '@core/types/sorting-types';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     ButtonComponent,
-    SvgLogo,
+    SvgLogoComponent,
     InputComponent,
     MatIconModule,
     NgIf,
@@ -26,7 +27,7 @@ import { ButtonToggleComponent } from '@shared/components/button-toggle/button-t
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  isFiltersOpened = false;
+  areFiltersOpened = false;
   protected searchService = inject(SearchService);
   searchValue: string = '';
 
@@ -35,7 +36,7 @@ export class HeaderComponent {
   }
 
   toggleFilters() {
-    this.isFiltersOpened = !this.isFiltersOpened;
+    this.areFiltersOpened = !this.areFiltersOpened;
   }
 
   search() {
@@ -43,11 +44,11 @@ export class HeaderComponent {
     this.searchService.searchByTitle(this.searchValue);
   }
 
-  sort(sortCriteria: string) {
+  sort(sortCriteria: SortingVariant) {
     this.searchService.sortBy(sortCriteria);
   }
 
   sortValueChange(value: string) {
-    this.searchService.setSortValue(value)
+    this.searchService.setSortValue(value);
   }
 }

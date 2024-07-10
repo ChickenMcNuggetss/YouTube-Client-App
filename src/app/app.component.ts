@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './core/components/header/header.component';
 import { MainPageComponent } from '@features/youtube/pages/main-page/main-page.component';
+
+import { HeaderComponent } from './core/components/header/header.component';
 
 @Component({
   selector: 'app-root',

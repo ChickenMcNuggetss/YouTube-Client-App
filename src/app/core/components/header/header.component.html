@@ -18,19 +18,19 @@
     </div>
   </div>
 
-  <div *ngIf="isFiltersOpened" class="header-filters">
+  <div *ngIf="areFiltersOpened" class="header-filters">
     <span>Sort by:</span>
     <app-button-toggle
       firstButtonValue="date asc"
       secondButtonValue="date desc"
-      (valueToggle)="sort($event)"></app-button-toggle>
+      (valueToggle)="sort($any($event))"></app-button-toggle>
     <app-button-toggle
       firstButtonValue="views asc"
       secondButtonValue="views desc"
-      (valueToggle)="sort($event)"></app-button-toggle>
+      (valueToggle)="sort($any($event))"></app-button-toggle>
     <div>
       <span>by word or sentence:</span>
-      <app-input (valueChange)="sortValueChange($event)"/>
+      <app-input inputLabelTitle="" (valueChange)="sortValueChange($event)" />
     </div>
   </div>
 </header>

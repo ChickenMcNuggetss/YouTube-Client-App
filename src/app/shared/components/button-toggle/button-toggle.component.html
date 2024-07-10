@@ -1,11 +1,8 @@
-<mat-button-toggle-group
-  name="favoriteColor"
-  aria-label="Favorite Color"
-  [hideSingleSelectionIndicator]="true">
-  <mat-button-toggle [value]="firstButtonValue" (click)="emitFirstValue()">{{
-    firstButtonValue
-  }}</mat-button-toggle>
-  <mat-button-toggle [value]="secondButtonValue" (click)="emitSecondValue()">{{
-    secondButtonValue
-  }}</mat-button-toggle>
+<mat-button-toggle-group [hideSingleSelectionIndicator]="true">
+  <mat-button-toggle [value]="firstButtonValue" (click)="emitFirstValue()">
+    {{ firstButtonValue }}
+  </mat-button-toggle>
+  <mat-button-toggle [value]="secondButtonValue" (click)="emitSecondValue()">
+    {{ secondButtonValue }}
+  </mat-button-toggle>
 </mat-button-toggle-group>

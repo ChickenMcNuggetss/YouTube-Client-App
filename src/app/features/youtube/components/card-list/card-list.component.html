@@ -1,5 +1,7 @@
 <div class="app-card-item-container">
   <app-card-item
-    *ngFor="let result of (searchService.sortedResults | sort: searchService.sortValue)"
-    [result]="result"></app-card-item>
+    *ngFor="
+      let item of searchService.sortedResults | sort: searchService.sortValue
+    "
+    [cardItem]="item"></app-card-item>
 </div>

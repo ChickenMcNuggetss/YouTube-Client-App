@@ -1,11 +1,11 @@
+import { NgStyle } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { ResponseItem } from '@core/interfaces/response';
-import { ButtonComponent } from '@shared/components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
-import { chooseColor } from '@features/youtube/utils/choose-color';
-import { NgStyle } from '@angular/common';
+import { ResponseItem } from '@core/interfaces/response';
+import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
+import { ButtonComponent } from '@shared/components/button/button.component';
 
 const BORDER_BOTTOM = '4px solid ';
 
@@ -23,13 +23,12 @@ const BORDER_BOTTOM = '4px solid ';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent implements OnInit {
-  @Input({ required: true }) result!: ResponseItem;
+  @Input({ required: true }) cardItem!: ResponseItem;
 
   borderColor: string = '';
 
   ngOnInit() {
-    const difference =
-      Date.now() - new Date(this.result.snippet.publishedAt).valueOf();
-    this.borderColor = BORDER_BOTTOM + chooseColor(difference);
+    const difference = Date.now() - new Date(this.cardItem.snippet.publishedAt).valueOf();
+    this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
   }
 }
