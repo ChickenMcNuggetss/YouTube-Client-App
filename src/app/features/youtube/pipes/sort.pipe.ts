@@ -3,7 +3,7 @@ import { ResponseItem } from '@core/interfaces/response';
 import { filterByTitle } from '@core/utils/filter-by-title';
 
 @Pipe({
-  name: 'sort',
+  name: 'filter',
   standalone: true,
 })
 export class FilteringPipe implements PipeTransform {
@@ -11,7 +11,7 @@ export class FilteringPipe implements PipeTransform {
     if (sortValue.trim() === '') {
       return value;
     }
-    const res = filterByTitle(value, sortValue);
-    return res;
+    const filteredResult = filterByTitle(value, sortValue);
+    return filteredResult;
   }
 }

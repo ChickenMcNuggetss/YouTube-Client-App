@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
-import { response } from '@features/youtube/response';
+import { Injectable, inject } from '@angular/core';
 
 import { ResponseItem } from '../interfaces/response';
 import { SortingVariant } from '@core/types/sorting-types';
 import { filterByTitle } from '@core/utils/filter-by-title';
+import { VideosService } from './videos.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
+  responseService = inject(VideosService)
   sortedResults: ResponseItem[] = [];
   sortValue: string = '';
 
   public searchByTitle(inputValue: string) {
-    this.sortedResults = filterByTitle(response, inputValue)
+    this.sortedResults = filterByTitle(this.responseService.responseList, inputValue);
   }
 
   private defineSortOrder(sortCriteria: SortingVariant) {
@@ -32,28 +33,39 @@ export class SearchService {
     return order * (firstValue - secondValue);
   }
 
-  public sortBy(sortCriteria: SortingVariant) {
-    let sortOrder = this.defineSortOrder(sortCriteria);
-
+  private sortByView(sortOrder: number) {
     this.sortedResults = this.sortedResults.sort((a, b) => {
-      if (sortCriteria.includes('view')) {
-        return this.defineSortCriteria({
-          order: sortOrder,
-          firstValue: Number(b.statistics.viewCount),
-          secondValue: Number(a.statistics.viewCount),
-        });
-      }
-      if (sortCriteria.includes('date')) {
-        const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
-        const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
-        return this.defineSortCriteria({
-          order: sortOrder,
-          firstValue: firstPublishDate,
-          secondValue: secondPublishDate,
-        });
-      }
-      return 0;
+      const firstCountValue = new Date(a.snippet.publishedAt).getTime();
+      const secondCountValue = new Date(b.snippet.publishedAt).getTime();
+      return this.defineSortCriteria({
+        order: sortOrder,
+        firstValue: firstCountValue,
+        secondValue: secondCountValue,
+      });
     });
+  }
+
+  private sortByDate(sortOrder: number) {
+    this.sortedResults = this.sortedResults.sort((a, b) => {
+      const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
+      const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
+      return this.defineSortCriteria({
+        order: sortOrder,
+        firstValue: firstPublishDate,
+        secondValue: secondPublishDate,
+      });
+    });
+  }
+
+  public sortBy(sortCriteria: SortingVariant) {
+    const sortOrder = this.defineSortOrder(sortCriteria);
+
+    if (sortCriteria.includes('view')) {
+      this.sortByView(sortOrder);
+    }
+    if (sortCriteria.includes('date')) {
+      this.sortByDate(sortOrder);
+    }
   }
 
   public setSortValue(value: string) {
