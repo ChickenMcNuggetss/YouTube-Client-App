@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SortingVariant } from '@core/types/sorting-types';
 
 @Component({
   selector: 'app-button-toggle',

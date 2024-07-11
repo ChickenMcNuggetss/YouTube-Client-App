@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ResponseItem } from '@core/interfaces/response';
 import { response } from '@features/youtube/response';
 
@@ -6,5 +6,5 @@ import { response } from '@features/youtube/response';
   providedIn: 'root'
 })
 export class VideosService {
-  responseList: ResponseItem[] = response
+  responseList: ResponseItem[] = response;
 }

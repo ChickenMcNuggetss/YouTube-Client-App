@@ -3,12 +3,12 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchService } from '@core/services/search/search.service';
+import { SortingVariant } from '@core/types/sorting-types';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
-import { SearchService } from '@core/services/search/search.service';
-import { SortingVariant } from '@core/types/sorting-types';
 
 @Component({
   selector: 'app-header',

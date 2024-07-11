@@ -1,15 +1,17 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { SortingVariant } from '@core/types/sorting-types';
+import { defineSortCriteria } from '@core/utils/define-sort-criteria';
+import { defineSortOrder } from '@core/utils/define-sort-order';
+import { filterByTitle } from '@core/utils/filter-by-title';
 
 import { ResponseItem } from '../../interfaces/response';
-import { SortingVariant } from '@core/types/sorting-types';
-import { filterByTitle } from '@core/utils/filter-by-title';
 import { VideosService } from '../videos/videos.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  responseService = inject(VideosService)
+  responseService = inject(VideosService);
   sortedResults: ResponseItem[] = [];
   sortValue: string = '';
 
@@ -17,27 +19,11 @@ export class SearchService {
     this.sortedResults = filterByTitle(this.responseService.responseList, inputValue);
   }
 
-  private defineSortOrder(sortCriteria: SortingVariant) {
-    return sortCriteria.includes('desc') ? -1 : 1;
-  }
-
-  private defineSortCriteria({
-    order,
-    firstValue,
-    secondValue,
-  }: {
-    order: number;
-    firstValue: number;
-    secondValue: number;
-  }) {
-    return order * (firstValue - secondValue);
-  }
-
   private sortByView(sortOrder: number) {
     this.sortedResults = this.sortedResults.sort((a, b) => {
       const firstCountValue = Number(a.statistics.viewCount);
       const secondCountValue = Number(b.statistics.viewCount);
-      return this.defineSortCriteria({
+      return defineSortCriteria({
         order: sortOrder,
         firstValue: firstCountValue,
         secondValue: secondCountValue,
@@ -49,7 +35,7 @@ export class SearchService {
     this.sortedResults = this.sortedResults.sort((a, b) => {
       const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
       const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
-      return this.defineSortCriteria({
+      return defineSortCriteria({
         order: sortOrder,
         firstValue: firstPublishDate,
         secondValue: secondPublishDate,
@@ -58,7 +44,7 @@ export class SearchService {
   }
 
   public sortBy(sortCriteria: SortingVariant) {
-    const sortOrder = this.defineSortOrder(sortCriteria);
+    const sortOrder = defineSortOrder(sortCriteria);
 
     if (sortCriteria.includes('view')) {
       this.sortByView(sortOrder);
