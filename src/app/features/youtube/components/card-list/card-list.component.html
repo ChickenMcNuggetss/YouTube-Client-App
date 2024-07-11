@@ -1,1 +1,7 @@
-<p>card-list works!</p>
+<div class="app-card-item-container">
+  <app-card-item
+    *ngFor="
+      let item of searchService.sortedResults | filter: searchService.sortValue
+    "
+    [cardItem]="item"></app-card-item>
+</div>

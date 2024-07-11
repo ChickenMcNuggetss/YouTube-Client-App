@@ -1,1 +1,33 @@
-<p>card-item works!</p>
+<mat-card
+  appearance="outlined"
+  class="app-card"
+  [ngStyle]="{ 'border-bottom': borderColor }">
+  <img
+    mat-card-image
+    [src]="cardItem.snippet.thumbnails.maxres.url"
+    [alt]="cardItem.snippet.title" />
+  <mat-card-header>
+    <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="video-statistics">
+    <div class="video-statistics-item">
+      <mat-icon>remove_red_eye</mat-icon
+      ><span>{{ cardItem.statistics.viewCount }}</span>
+    </div>
+    <div class="video-statistics-item">
+      <mat-icon>thumb_up</mat-icon
+      ><span>{{ cardItem.statistics.likeCount }}</span>
+    </div>
+    <div class="video-statistics-item">
+      <mat-icon>thumb_down</mat-icon
+      ><span>{{ cardItem.statistics.dislikeCount }}</span>
+    </div>
+    <div class="video-statistics-item">
+      <mat-icon>comment</mat-icon
+      ><span>{{ cardItem.statistics.commentCount }}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <app-button><span>More...</span></app-button>
+  </mat-card-actions>
+</mat-card>

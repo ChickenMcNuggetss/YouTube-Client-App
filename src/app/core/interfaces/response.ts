@@ -1,14 +1,4 @@
-export interface Response {
-  kind: string;
-  etag: string;
-  pageInfo: {
-    totalResults: number;
-    resultsPerPage: number;
-  };
-  items: ResponseItem[];
-}
-
-interface ResponseItem {
+export interface ResponseItem {
   kind: string;
   etag: string;
   id: string;
@@ -31,6 +21,7 @@ interface Snippet {
   channelTitle: string;
   tags: string[];
   categoryId: string;
+  defaultLanguage?: string;
   liveBroadcastContent: string;
   localized: {
     title: string;

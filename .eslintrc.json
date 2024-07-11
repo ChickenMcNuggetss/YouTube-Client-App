@@ -21,10 +21,16 @@
         "import/first": "error",
         "import/newline-after-import": "error",
         "import/no-duplicates": "error",
-        "max-len": ["error", 100],
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
         "unused-imports/no-unused-imports": "error",
+        "@typescript-eslint/no-useless-constructor": "error",
+        "class-methods-use-this": [
+          "error",
+          {
+            "exceptMethods": ["transform"]
+          }
+        ],
         "unused-imports/no-unused-vars": [
           "warn",
           {

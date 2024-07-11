@@ -1,0 +1,9 @@
+<mat-form-field>
+  <mat-label>{{ inputLabelTitle }}</mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="inputValue"
+    class="app-input"
+    (ngModelChange)="onInputChange()" />
+</mat-form-field>
