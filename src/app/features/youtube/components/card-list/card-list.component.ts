@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { SearchService } from '@core/services/search.service';
-import { FilteringPipe } from '@features/youtube/pipes/sort.pipe';
+import { SearchService } from '@core/services/search/search.service';
+import { FilteringPipe } from '@features/youtube/pipes/filtering.pipe';
 
 import { CardItemComponent } from '../card-item/card-item.component';
 

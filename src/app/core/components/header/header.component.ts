@@ -7,7 +7,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { InputComponent } from '@shared/components/input/input.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
-import { SearchService } from 'app/core/services/search.service';
+import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
 
 @Component({

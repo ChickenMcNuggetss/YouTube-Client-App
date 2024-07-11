@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 
-import { ResponseItem } from '../interfaces/response';
+import { ResponseItem } from '../../interfaces/response';
 import { SortingVariant } from '@core/types/sorting-types';
 import { filterByTitle } from '@core/utils/filter-by-title';
-import { VideosService } from './videos.service';
+import { VideosService } from '../videos/videos.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,8 +35,8 @@ export class SearchService {
 
   private sortByView(sortOrder: number) {
     this.sortedResults = this.sortedResults.sort((a, b) => {
-      const firstCountValue = new Date(a.snippet.publishedAt).getTime();
-      const secondCountValue = new Date(b.snippet.publishedAt).getTime();
+      const firstCountValue = Number(a.statistics.viewCount);
+      const secondCountValue = Number(b.statistics.viewCount);
       return this.defineSortCriteria({
         order: sortOrder,
         firstValue: firstCountValue,
