@@ -1,13 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { MainPageComponent } from '@features/youtube/pages/main-page/main-page.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { LoginPageComponent } from '@features/auth/pages/login/login-page.component';
 
 import { HeaderComponent } from './core/components/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, MainPageComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    HeaderComponent,
+    LoginPageComponent,
+    RouterLink,
+    RouterLinkActive,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
