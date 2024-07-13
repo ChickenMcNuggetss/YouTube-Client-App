@@ -7,4 +7,8 @@ import { response } from '@features/youtube/response';
 })
 export class VideosService {
   responseList: ResponseItem[] = response;
+
+  public getVideo(id: string) {
+    return this.responseList.find((el) => el.id === id);
+  }
 }
