@@ -1,13 +1,16 @@
 import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
+import { LoginService } from '@features/auth/services/login.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
-import { InputComponent } from '@shared/components/input/input.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
 
 @Component({
@@ -16,39 +19,41 @@ import { SvgLogoComponent } from '@shared/components/logo/logo.component';
   imports: [
     ButtonComponent,
     SvgLogoComponent,
-    InputComponent,
     MatIconModule,
     NgIf,
     MatButtonModule,
     MatChipsModule,
     ButtonToggleComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  areFiltersOpened = false;
-  protected searchService = inject(SearchService);
-  searchValue: string = '';
+  protected areFiltersOpened = false;
+  searchValue = new FormControl('');
+  sortFormControl = new FormControl('');
 
-  onSearchValueChange(value: string) {
-    this.searchValue = value.trim();
-  }
+  constructor(protected searchService: SearchService, protected loginService: LoginService) {}
 
   toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
   search() {
-    if (this.searchValue.length === 0) return;
-    this.searchService.searchByTitle(this.searchValue);
+    if (this.searchValue.value === null) return;
+    this.searchService.searchByTitle(this.searchValue.value);
   }
 
   sort(sortCriteria: SortingVariant) {
     this.searchService.sortBy(sortCriteria);
   }
 
-  sortValueChange(value: string) {
-    this.searchService.setSortValue(value);
+  sortValueChange() {
+    if (this.sortFormControl.value === null) return;
+    this.searchService.setSortValue(this.sortFormControl.value);
   }
 }

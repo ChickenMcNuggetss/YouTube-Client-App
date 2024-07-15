@@ -2,17 +2,25 @@
   <div class="header-container">
     <app-logo />
     <div class="header-search-container">
-      <form (submit)="$event.preventDefault(); search()" class="header-form">
-        <app-input
-          inputLabelTitle="Search"
-          (valueChange)="onSearchValueChange($event)" />
+      <form (ngSubmit)="search()" class="header-form">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input
+            matInput
+            type="text"
+            [formControl]="searchValue"
+          />
+        </mat-form-field>
         <app-button><span>Search</span></app-button>
       </form>
       <app-button (click)="toggleFilters()"
         ><mat-icon>sort</mat-icon></app-button
       >
     </div>
-    <div class="header-login-info"  routerLink="/first-component">
+    <div class="header-login-info" routerLink="/first-component">
+      <div *ngIf="loginService.isLoggedIn">
+        <app-button (click)="loginService.logout()"><span>Logout</span></app-button>
+      </div>
       <span>Username</span>
       <mat-icon>account_circle</mat-icon>
     </div>
@@ -30,7 +38,14 @@
       (valueToggle)="sort($any($event))"></app-button-toggle>
     <div>
       <span>by word or sentence:</span>
-      <app-input inputLabelTitle="" (valueChange)="sortValueChange($event)" />
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          [formControl]="sortFormControl"
+          (ngModelChange)="sortValueChange()"
+        />
+      </mat-form-field>
     </div>
   </div>
 </header>

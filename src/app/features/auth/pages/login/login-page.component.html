@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="login-container">
+  <div>Login</div>
+  <form class="login-form" (ngSubmit)="submitLoginForm()">
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="login"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        [formControl]="password"
+      />
+    </mat-form-field>
+     <app-button><span>Submit</span></app-button>
+  </form>
+</div>

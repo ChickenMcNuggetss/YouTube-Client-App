@@ -1,11 +1,18 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '@features/auth/guards/auth/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'main',
+    pathMatch: 'full'
+  },
+  {
+    path: 'main',
     loadComponent: () => import('@features/youtube/pages/main-page/main-page.component').then(
       (m) => m.MainPageComponent
     ),
+    canMatch: [authGuard]
   },
   {
     path: 'detailed-info/:id',
