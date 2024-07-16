@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { SortingVariant } from '@core/types/sorting-types';
 import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
@@ -11,12 +11,16 @@ import { VideosService } from '../videos/videos.service';
   providedIn: 'root',
 })
 export class SearchService {
-  responseService = inject(VideosService);
   sortedResults: ResponseItem[] = [];
   sortValue: string = '';
 
+  constructor(private responseService: VideosService) {}
+
   public searchByTitle(inputValue: string) {
-    this.sortedResults = filterByTitle(this.responseService.responseList, inputValue);
+    this.sortedResults = filterByTitle(
+      this.responseService.responseList,
+      inputValue
+    );
   }
 
   private sortByView(sortOrder: number) {

@@ -44,7 +44,7 @@ export class HeaderComponent {
   }
 
   search() {
-    if (this.searchValue.value === null) return;
+    if (!this.searchValue.value) return;
     this.searchService.searchByTitle(this.searchValue.value);
   }
 
@@ -53,7 +53,7 @@ export class HeaderComponent {
   }
 
   sortValueChange() {
-    if (this.sortFormControl.value === null) return;
+    if (!this.sortFormControl.value) return;
     this.searchService.setSortValue(this.sortFormControl.value);
   }
 }
