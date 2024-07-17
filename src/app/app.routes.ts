@@ -15,7 +15,7 @@ export const routes: Routes = [
     canMatch: [authGuard]
   },
   {
-    path: 'detailed-info/:id',
+    path: 'details/:id',
     loadComponent: () => import(
       '@features/youtube/pages/detailed-info-page/detailed-info-page.component'
     ).then((m) => m.DetailedInfoPageComponent),

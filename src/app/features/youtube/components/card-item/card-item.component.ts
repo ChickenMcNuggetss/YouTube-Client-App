@@ -25,9 +25,9 @@ const BORDER_BOTTOM = '4px solid ';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent implements OnInit {
-  @Input({ required: true }) cardItem!: ResponseItem;
+  protected borderColor: string = '';
 
-  borderColor: string = '';
+  @Input({ required: true }) cardItem!: ResponseItem;
 
   ngOnInit() {
     const difference = Date.now() - new Date(this.cardItem.snippet.publishedAt).valueOf();

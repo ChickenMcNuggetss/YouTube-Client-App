@@ -6,7 +6,7 @@ import { response } from '@features/youtube/response';
   providedIn: 'root'
 })
 export class VideosService {
-  responseList: ResponseItem[] = response;
+  public responseList: ResponseItem[] = response;
 
   public getVideo(id: string) {
     return this.responseList.find((el) => el.id === id);

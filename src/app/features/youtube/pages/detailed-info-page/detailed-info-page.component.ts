@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideosService } from '@core/services/videos/videos.service';
+import {
+  VideoInfo,
+  VideoStatistics,
+} from '@features/youtube/interfaces/video-info';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -13,17 +17,19 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   styleUrl: './detailed-info-page.component.scss',
 })
 export class DetailedInfoPageComponent implements OnInit {
-  protected info = {
-    title: '',
-    description: '',
-    publishDate: '',
-    image: '',
-    views: '',
-    likes: '',
-    dislikes: '',
-    commentCount: '',
+  protected info: VideoInfo = {
+    title: null,
+    description: null,
+    publishDate: null,
+    image: null,
   };
-  videoId = this.route.snapshot.paramMap.get('id');
+  protected statistics: VideoStatistics = {
+    views: null,
+    likes: null,
+    dislikes: null,
+    commentCount: null,
+  };
+  private videoId = this.route.snapshot.paramMap.get('id');
 
   constructor(
     private videosService: VideosService,
@@ -33,22 +39,27 @@ export class DetailedInfoPageComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.videoId) return;
-    const selectedVideo = this.videosService.getVideo(this.videoId);
-    if (selectedVideo) {
+    const { snippet, statistics } = {
+      snippet: this.videosService.getVideo(this.videoId)!.snippet,
+      statistics: this.videosService.getVideo(this.videoId)!.statistics,
+    };
+    if (snippet && statistics) {
       this.info = {
-        title: selectedVideo.snippet.title,
-        description: selectedVideo.snippet.description,
-        publishDate: selectedVideo.snippet.publishedAt,
-        image: selectedVideo.snippet.thumbnails.maxres.url,
-        views: selectedVideo.statistics.viewCount,
-        likes: selectedVideo.statistics.likeCount,
-        dislikes: selectedVideo.statistics.dislikeCount,
-        commentCount: selectedVideo.statistics.commentCount,
+        title: snippet.title,
+        description: snippet.description,
+        publishDate: snippet.publishedAt,
+        image: snippet.thumbnails.maxres.url,
+      };
+      this.statistics = {
+        views: statistics.viewCount,
+        likes: statistics.likeCount,
+        dislikes: statistics.dislikeCount,
+        commentCount: statistics.commentCount,
       };
     }
   }
 
-  routeToHome() {
+  protected routeToHome() {
     this.router.navigate(['']);
   }
 }

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -21,15 +26,17 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
-  login = new FormControl('');
-  password = new FormControl('');
+  protected form = new FormGroup({
+    login: new FormControl(''),
+    password: new FormControl(''),
+  });
 
   constructor(private loginService: LoginService) {}
 
-  submitLoginForm() {
+  protected submitLoginForm() {
     this.loginService.submitLoginForm({
-      login: this.login.value ?? '',
-      password: this.password.value ?? '',
+      login: this.form.value.login ?? '',
+      password: this.form.value.password ?? '',
     });
   }
 }

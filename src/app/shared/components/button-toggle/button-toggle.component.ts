@@ -17,11 +17,11 @@ export class ButtonToggleComponent {
   @Output() valueToggle = new EventEmitter<string>();
   hideSingleSelectionIndicator = signal(false);
 
-  emitFirstValue() {
+  protected emitFirstValue() {
     this.valueToggle.emit(this.firstButtonValue);
   }
 
-  emitSecondValue() {
+  protected emitSecondValue() {
     this.valueToggle.emit(this.secondButtonValue);
   }
 }

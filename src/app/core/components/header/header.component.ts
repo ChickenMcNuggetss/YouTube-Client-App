@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -32,28 +32,29 @@ import { SvgLogoComponent } from '@shared/components/logo/logo.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   protected areFiltersOpened = false;
-  searchValue = new FormControl('');
-  sortFormControl = new FormControl('');
+  protected searchValue = new FormControl('');
+  protected sortFormControl = new FormControl('');
 
   constructor(protected searchService: SearchService, protected loginService: LoginService) {}
 
-  toggleFilters() {
+  protected toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  search() {
+  ngOnInit() {
+    this.sortFormControl.valueChanges.subscribe((value) => {
+      this.searchService.setSortValue(value ?? '');
+    });
+  }
+
+  protected search() {
     if (!this.searchValue.value) return;
     this.searchService.searchByTitle(this.searchValue.value);
   }
 
-  sort(sortCriteria: SortingVariant) {
+  protected sort(sortCriteria: SortingVariant) {
     this.searchService.sortBy(sortCriteria);
-  }
-
-  sortValueChange() {
-    if (!this.sortFormControl.value) return;
-    this.searchService.setSortValue(this.sortFormControl.value);
   }
 }

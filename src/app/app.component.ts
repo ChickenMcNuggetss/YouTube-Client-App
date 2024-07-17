@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { LoginPageComponent } from '@features/auth/pages/login/login-page.component';
+import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './core/components/header/header.component';
 
@@ -12,9 +11,6 @@ import { HeaderComponent } from './core/components/header/header.component';
     CommonModule,
     RouterOutlet,
     HeaderComponent,
-    LoginPageComponent,
-    RouterLink,
-    RouterLinkActive,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

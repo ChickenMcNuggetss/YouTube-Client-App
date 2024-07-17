@@ -11,8 +11,8 @@ import { VideosService } from '../videos/videos.service';
   providedIn: 'root',
 })
 export class SearchService {
-  sortedResults: ResponseItem[] = [];
-  sortValue: string = '';
+  public sortedResults: ResponseItem[] = [];
+  public sortValue: string = '';
 
   constructor(private responseService: VideosService) {}
 

@@ -17,7 +17,7 @@
         ><mat-icon>sort</mat-icon></app-button
       >
     </div>
-    <div class="header-login-info" routerLink="/first-component">
+    <div class="header-login-info">
       <div *ngIf="loginService.isLoggedIn">
         <app-button (click)="loginService.logout()"><span>Logout</span></app-button>
       </div>
@@ -43,7 +43,6 @@
           matInput
           type="text"
           [formControl]="sortFormControl"
-          (ngModelChange)="sortValueChange()"
         />
       </mat-form-field>
     </div>
