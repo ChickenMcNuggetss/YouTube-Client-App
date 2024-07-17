@@ -27,8 +27,8 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 })
 export class LoginPageComponent {
   protected form = new FormGroup({
-    login: new FormControl(null),
-    password: new FormControl(null),
+    login: new FormControl(''),
+    password: new FormControl(''),
   });
 
   constructor(private loginService: LoginService) {}

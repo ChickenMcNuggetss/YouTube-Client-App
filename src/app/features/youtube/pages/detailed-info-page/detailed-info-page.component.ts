@@ -2,11 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Snippet, Statistics } from '@core/interfaces/video-info';
 import { VideosService } from '@core/services/videos/videos.service';
-import {
-  VideoInfo,
-  VideoStatistics,
-} from '@features/youtube/interfaces/video-info';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -17,18 +14,8 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   styleUrl: './detailed-info-page.component.scss',
 })
 export class DetailedInfoPageComponent implements OnInit {
-  protected info: VideoInfo = {
-    title: null,
-    description: null,
-    publishDate: null,
-    image: null,
-  };
-  protected statistics: VideoStatistics = {
-    views: null,
-    likes: null,
-    dislikes: null,
-    commentCount: null,
-  };
+  protected videoInfo: Snippet | null = null;
+  protected statistics: Statistics | null = null;
   private videoId = this.route.snapshot.paramMap.get('id');
 
   constructor(
@@ -39,23 +26,14 @@ export class DetailedInfoPageComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.videoId) return;
+    const video = this.videosService.getVideo(this.videoId);
     const { snippet, statistics } = {
-      snippet: this.videosService.getVideo(this.videoId)!.snippet,
-      statistics: this.videosService.getVideo(this.videoId)!.statistics,
+      snippet: video!.snippet,
+      statistics: video!.statistics,
     };
     if (snippet && statistics) {
-      this.info = {
-        title: snippet.title,
-        description: snippet.description,
-        publishDate: snippet.publishedAt,
-        image: snippet.thumbnails.maxres.url,
-      };
-      this.statistics = {
-        views: statistics.viewCount,
-        likes: statistics.likeCount,
-        dislikes: statistics.dislikeCount,
-        commentCount: statistics.commentCount,
-      };
+      this.videoInfo = snippet;
+      this.statistics = statistics;
     }
   }
 

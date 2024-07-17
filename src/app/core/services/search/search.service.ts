@@ -4,21 +4,21 @@ import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
 import { filterByTitle } from '@core/utils/filter-by-title';
 
-import { ResponseItem } from '../../interfaces/response';
+import { VideoInfo } from '../../interfaces/video-info';
 import { VideosService } from '../videos/videos.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  public sortedResults: ResponseItem[] = [];
+  public sortedResults: VideoInfo[] = [];
   public sortValue: string = '';
 
-  constructor(private responseService: VideosService) {}
+  constructor(private videosService: VideosService) {}
 
   public searchByTitle(inputValue: string) {
     this.sortedResults = filterByTitle(
-      this.responseService.responseList,
+      this.videosService.responseList,
       inputValue
     );
   }

@@ -1,4 +1,4 @@
-export interface ResponseItem {
+export interface VideoInfo {
   kind: string;
   etag: string;
   id: string;
@@ -6,7 +6,7 @@ export interface ResponseItem {
   statistics: Statistics;
 }
 
-interface Snippet {
+export interface Snippet {
   publishedAt: string;
   channelId: string;
   title: string;
@@ -30,7 +30,7 @@ interface Snippet {
   defaultAudioLanguage: string;
 }
 
-interface Statistics {
+export interface Statistics {
   viewCount: string;
   likeCount: string;
   dislikeCount: string;

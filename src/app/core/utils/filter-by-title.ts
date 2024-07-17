@@ -1,5 +1,5 @@
-import { ResponseItem } from '@core/interfaces/response';
+import { VideoInfo } from '@core/interfaces/video-info';
 
-export function filterByTitle(response: ResponseItem[], inputValue: string) {
+export function filterByTitle(response: VideoInfo[], inputValue: string) {
   return response.filter((el) => el.snippet.title.toLowerCase().includes(inputValue.toLowerCase()));
 }

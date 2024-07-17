@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -12,6 +12,7 @@ import { LoginService } from '@features/auth/services/login.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -32,26 +33,31 @@ import { SvgLogoComponent } from '@shared/components/logo/logo.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnDestroy {
   protected areFiltersOpened = false;
-  protected searchValue = new FormControl(null);
-  protected sortFormControl = new FormControl(null);
+  protected searchFormControl = new FormControl('');
+  protected sortFormControl = new FormControl('');
+  private sortFormControlSubscription: Subscription = this.sortFormControl.valueChanges
+    .subscribe((value) => {
+      this.searchService.setSortValue(value ?? '');
+    });
 
-  constructor(protected searchService: SearchService, protected loginService: LoginService) {}
+  constructor(
+    protected searchService: SearchService,
+    protected loginService: LoginService
+  ) {}
+
+  ngOnDestroy() {
+    this.sortFormControlSubscription.unsubscribe();
+  }
 
   protected toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  ngOnInit() {
-    this.sortFormControl.valueChanges.subscribe((value) => {
-      this.searchService.setSortValue(value ?? '');
-    });
-  }
-
   protected search() {
-    if (!this.searchValue.value) return;
-    this.searchService.searchByTitle(this.searchValue.value);
+    if (!this.searchFormControl.value) return;
+    this.searchService.searchByTitle(this.searchFormControl.value);
   }
 
   protected sort(sortCriteria: SortingVariant) {

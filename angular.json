@@ -96,7 +96,7 @@
         "deploy": {
           "builder": "@netlify-builder/deploy:deploy",
           "options": {
-            "outputPath": "dist/you-tube-client-app",
+            "outputPath": "dist/you-tube-client-app/browser",
             "netlifyToken": "nfp_QEWsHuKFyU2DziJ9uL7wu1pgHqm1K8if2285",
             "siteId": "eecca8b3-9d65-44c0-99d2-42289058da8b"
           }

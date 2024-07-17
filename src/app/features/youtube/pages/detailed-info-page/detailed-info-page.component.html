@@ -1,36 +1,41 @@
 <div class="detailed-info-wrapper">
-<div class="go-back-button">
-  <app-button (click)="routeToHome()"><mat-icon>keyboard_arrow_left</mat-icon></app-button>
-</div>
-<div class="detailed-info-container">
-  <img [src]="info.image" alt="preview" class="preview-image"/>
-  <div class="detailed-info">
-    <div class="detailed-info-title">
-      <div class="title">{{info.title}}</div>
-      <div>{{info.publishDate | date: 'fullDate'}}</div>
-    </div>
-    <div class="detailed-info-description">
-      <div class="detailed-info-title-description">Description:</div>
-      <div>{{info.description}}</div>
-    </div>
-    <div class="detailed-info-statistics">
-      <div class="video-statistics-item">
-        <mat-icon>remove_red_eye</mat-icon
-        ><span>{{ statistics.views }}</span>
-      </div>
-      <div class="video-statistics-item">
-        <mat-icon>thumb_up</mat-icon
-        ><span>{{ statistics.likes }}</span>
-      </div>
-      <div class="video-statistics-item">
-        <mat-icon>thumb_down</mat-icon
-        ><span>{{ statistics.dislikes }}</span>
-      </div>
-      <div class="video-statistics-item">
-        <mat-icon>comment</mat-icon
-        ><span>{{ statistics.commentCount }}</span>
-      </div>
-    </div>
+  <div class="go-back-button">
+    <app-button (click)="routeToHome()"
+      ><mat-icon>keyboard_arrow_left</mat-icon></app-button
+    >
   </div>
-</div>
+  @if (videoInfo && statistics) {
+    <div class="detailed-info-container">
+      <img
+        [src]="videoInfo.thumbnails.maxres.url"
+        alt="preview"
+        class="preview-image" />
+      <div class="detailed-info">
+        <div class="detailed-info-title">
+          <div class="title">{{ videoInfo.title }}</div>
+          <div>{{ videoInfo.publishedAt | date: 'fullDate' }}</div>
+        </div>
+        <div class="detailed-info-description">
+          <div class="detailed-info-title-description">Description:</div>
+          <div>{{ videoInfo.description }}</div>
+        </div>
+        <div class="detailed-info-statistics">
+          <div class="video-statistics-item">
+            <mat-icon>remove_red_eye</mat-icon
+            ><span>{{ statistics.viewCount }}</span>
+          </div>
+          <div class="video-statistics-item">
+            <mat-icon>thumb_up</mat-icon><span>{{ statistics.likeCount }}</span>
+          </div>
+          <div class="video-statistics-item">
+            <mat-icon>thumb_down</mat-icon
+            ><span>{{ statistics.dislikeCount }}</span>
+          </div>
+          <div class="video-statistics-item">
+            <mat-icon>comment</mat-icon><span>{{ statistics.commentCount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

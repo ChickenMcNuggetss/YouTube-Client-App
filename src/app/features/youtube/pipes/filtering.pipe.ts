@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ResponseItem } from '@core/interfaces/response';
+import { VideoInfo } from '@core/interfaces/video-info';
 import { filterByTitle } from '@core/utils/filter-by-title';
 
 @Pipe({
@@ -7,7 +7,7 @@ import { filterByTitle } from '@core/utils/filter-by-title';
   standalone: true,
 })
 export class FilteringPipe implements PipeTransform {
-  transform(value: ResponseItem[], sortValue: string): ResponseItem[] {
+  transform(value: VideoInfo[], sortValue: string): VideoInfo[] {
     if (sortValue.trim() === '') {
       return value;
     }
