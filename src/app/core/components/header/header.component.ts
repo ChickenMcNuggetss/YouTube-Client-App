@@ -34,8 +34,8 @@ import { SvgLogoComponent } from '@shared/components/logo/logo.component';
 })
 export class HeaderComponent implements OnInit {
   protected areFiltersOpened = false;
-  protected searchValue = new FormControl('');
-  protected sortFormControl = new FormControl('');
+  protected searchValue = new FormControl(null);
+  protected sortFormControl = new FormControl(null);
 
   constructor(protected searchService: SearchService, protected loginService: LoginService) {}
 

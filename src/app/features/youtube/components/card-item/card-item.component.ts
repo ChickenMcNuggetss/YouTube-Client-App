@@ -25,7 +25,7 @@ const BORDER_BOTTOM = '4px solid ';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent implements OnInit {
-  protected borderColor: string = '';
+  protected borderColor: string | null = null;
 
   @Input({ required: true }) cardItem!: ResponseItem;
 

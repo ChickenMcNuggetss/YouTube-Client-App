@@ -6,13 +6,26 @@ import { StorageService } from '@core/services/storage/storage.service';
   providedIn: 'root',
 })
 export class LoginService {
-  protected loginData: { login: string; password: string } = { login: '', password: '' };
+  protected loginData: { login: string | null; password: string | null } = {
+    login: null,
+    password: null,
+  };
   public isLoggedIn = false;
 
-  constructor(private router: Router, private storageService: StorageService) {}
+  constructor(
+    private router: Router,
+    private storageService: StorageService
+  ) {}
 
-  public submitLoginForm({ login, password }: { login: string; password: string }) {
+  public submitLoginForm({
+    login,
+    password,
+  }: {
+    login: string;
+    password: string;
+  }) {
     this.loginData = { login, password };
+    if (!this.loginData.login) return;
     this.storageService.set('authToken', this.loginData.login);
     this.toggleUserState();
     this.router.navigate(['main']);
