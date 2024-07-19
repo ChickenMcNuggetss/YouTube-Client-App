@@ -1,0 +1,22 @@
+<div class="login-container">
+  <div class="login-title">Login</div>
+  <form [formGroup]="form" class="login-form" (ngSubmit)="submitLoginForm()">
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="login"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+     <app-button><span>Submit</span></app-button>
+  </form>
+</div>

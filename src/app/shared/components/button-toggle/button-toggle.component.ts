@@ -3,7 +3,6 @@ import {
 } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SortingVariant } from '@core/types/sorting-types';
 
 @Component({
   selector: 'app-button-toggle',
@@ -18,11 +17,11 @@ export class ButtonToggleComponent {
   @Output() valueToggle = new EventEmitter<string>();
   hideSingleSelectionIndicator = signal(false);
 
-  emitFirstValue() {
+  protected emitFirstValue() {
     this.valueToggle.emit(this.firstButtonValue);
   }
 
-  emitSecondValue() {
+  protected emitSecondValue() {
     this.valueToggle.emit(this.secondButtonValue);
   }
 }

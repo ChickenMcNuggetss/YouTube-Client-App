@@ -1,6 +1,6 @@
-import { ResponseItem } from 'app/core/interfaces/response';
+import { VideoInfo } from 'app/core/interfaces/video-info';
 
-export const response: ResponseItem[] = [
+export const video: VideoInfo[] = [
   {
     kind: 'youtube#video',
     etag: '"Fznwjl6JEQdo1MGvHOGaz_YanRU/tmmI1yiRrmLWlKikXk1gD3TXsUI"',

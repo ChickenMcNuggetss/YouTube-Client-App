@@ -1,14 +1,18 @@
 import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { ButtonComponent } from '@shared/components/button/button.component';
-import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
-import { InputComponent } from '@shared/components/input/input.component';
-import { SvgLogoComponent } from '@shared/components/logo/logo.component';
+import { MatInputModule } from '@angular/material/input';
 import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
+import { AuthService } from '@features/auth/services/auth.service';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
+import { SvgLogoComponent } from '@shared/components/logo/logo.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -16,39 +20,47 @@ import { SortingVariant } from '@core/types/sorting-types';
   imports: [
     ButtonComponent,
     SvgLogoComponent,
-    InputComponent,
     MatIconModule,
     NgIf,
     MatButtonModule,
     MatChipsModule,
     ButtonToggleComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
-  areFiltersOpened = false;
-  protected searchService = inject(SearchService);
-  searchValue: string = '';
+export class HeaderComponent implements OnDestroy {
+  protected areFiltersOpened = false;
+  protected searchFormControl = new FormControl('');
+  protected sortFormControl = new FormControl('');
+  private sortFormControlSubscription: Subscription = this.sortFormControl.valueChanges
+    .subscribe((value) => {
+      this.searchService.setSortValue(value ?? '');
+    });
 
-  onSearchValueChange(value: string) {
-    this.searchValue = value.trim();
+  constructor(
+    protected searchService: SearchService,
+    protected authService: AuthService
+  ) {}
+
+  ngOnDestroy() {
+    this.sortFormControlSubscription.unsubscribe();
   }
 
-  toggleFilters() {
+  protected toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  search() {
-    if (this.searchValue.length === 0) return;
-    this.searchService.searchByTitle(this.searchValue);
+  protected search() {
+    if (!this.searchFormControl.value) return;
+    this.searchService.searchByTitle(this.searchFormControl.value);
   }
 
-  sort(sortCriteria: SortingVariant) {
+  protected sort(sortCriteria: SortingVariant) {
     this.searchService.sortBy(sortCriteria);
-  }
-
-  sortValueChange(value: string) {
-    this.searchService.setSortValue(value);
   }
 }
