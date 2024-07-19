@@ -5,7 +5,7 @@ import { StorageService } from '@core/services/storage/storage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class AuthService {
   protected loginData: { login: string | null; password: string | null } = {
     login: null,
     password: null,

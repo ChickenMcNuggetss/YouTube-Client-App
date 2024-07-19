@@ -27,14 +27,13 @@ export class DetailedInfoPageComponent implements OnInit {
   ngOnInit(): void {
     if (!this.videoId) return;
     const video = this.videosService.getVideo(this.videoId);
+    if (!video) return;
     const { snippet, statistics } = {
-      snippet: video!.snippet,
-      statistics: video!.statistics,
+      snippet: video.snippet,
+      statistics: video.statistics,
     };
-    if (snippet && statistics) {
-      this.videoInfo = snippet;
-      this.statistics = statistics;
-    }
+    this.videoInfo = snippet;
+    this.statistics = statistics;
   }
 
   protected routeToHome() {

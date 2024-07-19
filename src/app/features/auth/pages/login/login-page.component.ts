@@ -8,7 +8,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { LoginService } from '@features/auth/services/login.service';
+import { AuthService } from '@features/auth/services/auth.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -31,10 +31,10 @@ export class LoginPageComponent {
     password: new FormControl(''),
   });
 
-  constructor(private loginService: LoginService) {}
+  constructor(private authService: AuthService) {}
 
   protected submitLoginForm() {
-    this.loginService.submitLoginForm({
+    this.authService.submitLoginForm({
       login: this.form.value.login ?? '',
       password: this.form.value.password ?? '',
     });

@@ -18,7 +18,7 @@ export class SearchService {
 
   public searchByTitle(inputValue: string) {
     this.sortedResults = filterByTitle(
-      this.videosService.responseList,
+      this.videosService.videosList,
       inputValue
     );
   }

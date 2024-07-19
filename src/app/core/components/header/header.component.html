@@ -18,8 +18,8 @@
       >
     </div>
     <div class="header-login-info">
-      <div *ngIf="loginService.isLoggedIn">
-        <app-button (click)="loginService.logout()"><span>Logout</span></app-button>
+      <div *ngIf="authService.isLoggedIn">
+        <app-button (click)="authService.logout()"><span>Logout</span></app-button>
       </div>
       <span>Username</span>
       <mat-icon>account_circle</mat-icon>

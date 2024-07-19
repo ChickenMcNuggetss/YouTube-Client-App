@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
-import { LoginService } from '@features/auth/services/login.service';
+import { AuthService } from '@features/auth/services/auth.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
@@ -44,7 +44,7 @@ export class HeaderComponent implements OnDestroy {
 
   constructor(
     protected searchService: SearchService,
-    protected loginService: LoginService
+    protected authService: AuthService
   ) {}
 
   ngOnDestroy() {

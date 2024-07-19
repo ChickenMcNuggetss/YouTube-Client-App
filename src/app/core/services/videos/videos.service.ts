@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { VideoInfo } from '@core/interfaces/video-info';
-import { response } from '@features/youtube/response';
+import { video } from '@features/youtube/video';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideosService {
-  public responseList: VideoInfo[] = response;
+  public videosList: VideoInfo[] = video;
 
   public getVideo(id: string) {
-    return this.responseList.find((el) => el.id === id);
+    return this.videosList.find((listItem) => listItem.id === id);
   }
 }
