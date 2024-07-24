@@ -4,11 +4,13 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '@features/auth/services/auth.service';
+import { passwordValidator } from '@features/auth/validators/password-validator';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -27,8 +29,8 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 })
 export class LoginPageComponent {
   protected form = new FormGroup({
-    login: new FormControl(''),
-    password: new FormControl(''),
+    login: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, passwordValidator()]),
   });
 
   constructor(private authService: AuthService) {}
