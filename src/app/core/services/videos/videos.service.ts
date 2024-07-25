@@ -3,7 +3,7 @@ import { VideoInfo } from '@core/interfaces/video-info';
 import { video } from '@features/youtube/video';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VideosService {
   public videosList: VideoInfo[] = video;

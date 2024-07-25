@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { NotFoundImageComponent } from '@shared/components/not-found-image/not-found-image.component';
+import { NotFoundComponent } from '@shared/components/not-found-component/not-found.component';
 
 @Component({
   selector: 'app-page-not-found',
   standalone: true,
-  imports: [MatIconModule, NotFoundImageComponent],
+  imports: [MatIconModule, NotFoundComponent],
   templateUrl: './page-not-found.component.html',
-  styleUrl: './page-not-found.component.scss'
+  styleUrl: './page-not-found.component.scss',
 })
-export class PageNotFoundComponent {
-
-}
+export class PageNotFoundComponent {}

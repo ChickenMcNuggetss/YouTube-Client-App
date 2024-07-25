@@ -5,11 +5,7 @@
       <form (ngSubmit)="search()" class="header-form">
         <mat-form-field>
           <mat-label>Search</mat-label>
-          <input
-            matInput
-            type="text"
-            [formControl]="searchFormControl"
-          />
+          <input matInput type="text" [formControl]="searchFormControl" />
         </mat-form-field>
         <app-button><span>Search</span></app-button>
       </form>
@@ -19,7 +15,9 @@
     </div>
     <div class="header-login-info">
       <div *ngIf="authService.isLoggedIn">
-        <app-button (click)="authService.logout()"><span>Logout</span></app-button>
+        <app-button (click)="authService.logout()"
+          ><span>Logout</span></app-button
+        >
       </div>
       <span>Username</span>
       <mat-icon>account_circle</mat-icon>
@@ -39,11 +37,7 @@
     <div>
       <span>by word or sentence:</span>
       <mat-form-field>
-        <input
-          matInput
-          type="text"
-          [formControl]="sortFormControl"
-        />
+        <input matInput type="text" [formControl]="sortFormControl" />
       </mat-form-field>
     </div>
   </div>

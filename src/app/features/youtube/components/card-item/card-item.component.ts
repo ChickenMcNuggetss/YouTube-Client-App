@@ -19,7 +19,7 @@ const BORDER_BOTTOM = '4px solid ';
     ButtonComponent,
     MatIconModule,
     NgStyle,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',

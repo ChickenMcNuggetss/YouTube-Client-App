@@ -37,10 +37,11 @@ export class HeaderComponent implements OnDestroy {
   protected areFiltersOpened = false;
   protected searchFormControl = new FormControl('');
   protected sortFormControl = new FormControl('');
-  private sortFormControlSubscription: Subscription = this.sortFormControl.valueChanges
-    .subscribe((value) => {
+  private sortFormControlSubscription: Subscription = this.sortFormControl.valueChanges.subscribe(
+    (value) => {
       this.searchService.setSortValue(value ?? '');
-    });
+    }
+  );
 
   constructor(
     protected searchService: SearchService,
