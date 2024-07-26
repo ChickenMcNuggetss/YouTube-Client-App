@@ -15,9 +15,13 @@ export function determineControlErrorText(
   if (!control) return null;
   if (control.errors === null) return null;
   const error = Object.keys(control.errors)[0];
-  const receivedError = errors[error as keyof typeof errors];
-  if (typeof receivedError === 'function') {
-    return receivedError(controlName);
+  if (error in errors) {
+    const receivedError = errors[error as keyof typeof errors];
+    if (typeof receivedError === 'function') {
+      return receivedError(controlName);
+    }
+    return receivedError;
   }
-  return receivedError;
+
+  return null;
 }
