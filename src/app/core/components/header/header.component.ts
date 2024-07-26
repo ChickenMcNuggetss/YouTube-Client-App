@@ -45,7 +45,7 @@ export class HeaderComponent implements OnDestroy {
 
   constructor(
     protected searchService: SearchService,
-    protected authService: AuthService
+    protected authService: AuthService,
   ) {}
 
   ngOnDestroy() {

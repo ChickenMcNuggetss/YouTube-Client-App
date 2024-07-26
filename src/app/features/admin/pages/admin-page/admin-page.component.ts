@@ -13,9 +13,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { validateCreationDate } from '@features/admin/validators/validate-creation-date';
+import { getDateValidator } from '@features/admin/validators/get-date-validator';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { defineControlErrorText } from '@shared/utils/define-error-text';
+import { determineControlErrorText } from '@shared/utils/determine-error-text';
 
 function createTagItem() {
   return new FormGroup({
@@ -51,7 +51,7 @@ export class AdminPageComponent {
     videoLink: new FormControl('', [Validators.required]),
     creationDate: new FormControl('', [
       Validators.required,
-      validateCreationDate(),
+      getDateValidator(),
     ]),
     tags: new FormArray([createTagItem()]),
   });
@@ -81,8 +81,8 @@ export class AdminPageComponent {
   }
 
   protected addTag() {
-    if (this.tags.length > 4) return undefined;
-    return this.tags.push(createTagItem());
+    if (this.tags.length > 4) return;
+    this.tags.push(createTagItem());
   }
 
   protected resetCreateCardForm() {
@@ -90,11 +90,10 @@ export class AdminPageComponent {
     this.createCardForm.reset();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected getErrorText(
     control: AbstractControl<string | null, string | null> | null,
-    controlName: string
+    controlName: string,
   ) {
-    return defineControlErrorText(control, controlName);
+    return determineControlErrorText(control, controlName);
   }
 }

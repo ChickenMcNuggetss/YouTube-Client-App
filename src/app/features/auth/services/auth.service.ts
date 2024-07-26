@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {}
 
   public submitLoginForm({

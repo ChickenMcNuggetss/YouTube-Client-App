@@ -11,5 +11,5 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatButtonModule, MatDividerModule, MatIconModule],
 })
 export class ButtonComponent {
-  @Input() buttonType = 'button';
+  @Input() type = 'button';
 }

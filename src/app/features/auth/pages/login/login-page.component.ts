@@ -11,9 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '@features/auth/services/auth.service';
-import { passwordValidator } from '@features/auth/validators/password-validator';
+import { getPasswordValidator } from '@features/auth/validators/get-password-validator';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { defineControlErrorText } from '@shared/utils/define-error-text';
+import { determineControlErrorText } from '@shared/utils/determine-error-text';
 
 @Component({
   selector: 'app-login-page',
@@ -32,7 +32,7 @@ import { defineControlErrorText } from '@shared/utils/define-error-text';
 export class LoginPageComponent {
   protected form = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, passwordValidator()]),
+    password: new FormControl('', [Validators.required, getPasswordValidator()]),
   });
 
   constructor(private authService: AuthService) {}
@@ -53,11 +53,10 @@ export class LoginPageComponent {
     return this.form.get('password');
   }
 
-  // eslint-disable-next-line class-methods-use-this
   protected getErrorText(
     control: AbstractControl<string | null, string | null> | null,
-    controlName: string
+    controlName: string,
   ) {
-    return defineControlErrorText(control, controlName);
+    return determineControlErrorText(control, controlName);
   }
 }
