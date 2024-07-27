@@ -29,7 +29,7 @@
         "class-methods-use-this": [
           "error",
           {
-            "exceptMethods": ["transform"]
+            "exceptMethods": ["transform", "getErrorText"]
           }
         ],
         "unused-imports/no-unused-vars": [

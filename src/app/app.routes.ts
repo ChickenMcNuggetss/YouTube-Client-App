@@ -5,14 +5,14 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'main',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'main',
     loadComponent: () => import('@features/youtube/pages/main-page/main-page.component').then(
-      (m) => m.MainPageComponent
+      (m) => m.MainPageComponent,
     ),
-    canMatch: [authGuard]
+    canMatch: [authGuard],
   },
   {
     path: 'details/:id',
@@ -23,13 +23,19 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('@features/auth/pages/login/login-page.component').then(
-      (m) => m.LoginPageComponent
+      (m) => m.LoginPageComponent,
+    ),
+  },
+  {
+    path: 'admin',
+    loadComponent: () => import('@features/admin/pages/admin-page/admin-page.component').then(
+      (m) => m.AdminPageComponent,
     ),
   },
   {
     path: '**',
     loadComponent: () => import('@core/components/page-not-found/page-not-found.component').then(
-      (m) => m.PageNotFoundComponent
+      (m) => m.PageNotFoundComponent,
     ),
   },
 ];

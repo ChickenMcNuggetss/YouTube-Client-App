@@ -21,7 +21,7 @@ export class DetailedInfoPageComponent implements OnInit {
   constructor(
     private videosService: VideosService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {

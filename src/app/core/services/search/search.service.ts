@@ -19,7 +19,7 @@ export class SearchService {
   public searchByTitle(inputValue: string) {
     this.sortedResults = filterByTitle(
       this.videosService.videosList,
-      inputValue
+      inputValue,
     );
   }
 

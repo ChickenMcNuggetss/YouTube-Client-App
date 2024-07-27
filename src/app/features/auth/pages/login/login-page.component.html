@@ -3,20 +3,20 @@
   <form [formGroup]="form" class="login-form" (ngSubmit)="submitLoginForm()">
     <mat-form-field>
       <mat-label>Login</mat-label>
-      <input
-        matInput
-        type="text"
-        formControlName="login"
-      />
+      <input matInput type="text" formControlName="login" />
+      @if (login?.invalid) {
+        <mat-error>{{ getErrorText(login, 'login') }}</mat-error>
+      }
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input
-        matInput
-        type="password"
-        formControlName="password"
-      />
+      <input matInput type="password" formControlName="password" />
+      @if (password?.invalid) {
+        <mat-error>{{ getErrorText(password, 'password') }}</mat-error>
+      }
     </mat-form-field>
-     <app-button><span>Submit</span></app-button>
+    <app-button type="submit" class="login-submit-button"
+      ><span>Submit</span></app-button
+    >
   </form>
 </div>

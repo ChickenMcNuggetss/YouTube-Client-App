@@ -1,0 +1,75 @@
+<div class="admin-page-container">
+  <div class="admin-page-title"><strong>Create new card</strong></div>
+  <form [formGroup]="createCardForm" class="create-card-form">
+    <div class="create-card-form-controls-wrapper">
+      <div class="create-card-form-controls-container">
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput type="text" formControlName="title" />
+          @if (title?.invalid) {
+            <mat-error>{{ getErrorText(title, 'title') }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput type="text" formControlName="description" />
+          @if (description?.invalid) {
+            <mat-error>{{
+              getErrorText(description, 'description')
+            }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Image</mat-label>
+          <input matInput type="text" formControlName="imageLink" />
+          @if (imageLink?.invalid) {
+            <mat-error>{{ getErrorText(imageLink, 'image link') }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Link video</mat-label>
+          <input matInput type="text" formControlName="videoLink" />
+          @if (videoLink?.invalid) {
+            <mat-error>{{ getErrorText(videoLink, 'video link') }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Video's creation date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="creationDatePicker"
+            formControlName="creationDate" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="creationDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #creationDatePicker disabled="false"></mat-datepicker>
+          @if (creationDate?.invalid) {
+            <mat-error>{{
+              getErrorText(creationDate, 'creation date')
+            }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="create-card-form-controls-container">
+        <div
+          formArrayName="tags"
+          *ngFor="let tag of tags.controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field>
+              <mat-label>Tag</mat-label>
+              <input matInput type="text" formControlName="tag" />
+            </mat-form-field>
+          </div>
+        </div>
+        <app-button (click)="addTag()"><span>Add tag</span></app-button>
+      </div>
+    </div>
+    <div class="button-container">
+      <app-button (click)="resetCreateCardForm()"
+        ><span>Reset</span></app-button
+      >
+      <app-button type="submit"><span>Create card</span></app-button>
+    </div>
+  </form>
+</div>
