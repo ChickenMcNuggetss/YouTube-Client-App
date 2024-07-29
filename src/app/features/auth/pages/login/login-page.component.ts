@@ -32,7 +32,10 @@ import { determineControlErrorText } from '@shared/utils/determine-error-text';
 export class LoginPageComponent {
   protected form = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, getPasswordValidator()]),
+    password: new FormControl('', [
+      Validators.required,
+      getPasswordValidator(),
+    ]),
   });
 
   constructor(private authService: AuthService) {}

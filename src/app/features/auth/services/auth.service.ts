@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '@core/services/storage/storage.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  authState: Observable<{ state: boolean }> = new Observable({ state: true });
   protected loginData: { login: string | null; password: string | null } = {
     login: null,
     password: null,

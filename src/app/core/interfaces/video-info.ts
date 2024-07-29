@@ -1,3 +1,13 @@
+export interface VideoResponse {
+  kind: string,
+  etag: string,
+  pageInfo: {
+    totalResults: number,
+    resultsPerPage: number
+  },
+  items: VideoInfo[]
+}
+
 export interface VideoInfo {
   kind: string;
   etag: string;
