@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Snippet, Statistics } from '@core/interfaces/video-info';
-import { VideosService } from '@core/services/videos/videos.service';
+import { SearchService } from '@core/services/search/search.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -13,27 +13,28 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   templateUrl: './detailed-info-page.component.html',
   styleUrl: './detailed-info-page.component.scss',
 })
-export class DetailedInfoPageComponent implements OnInit {
+export class DetailedInfoPageComponent implements OnDestroy {
   protected videoInfo: Snippet | null = null;
   protected statistics: Statistics | null = null;
   private videoId = this.route.snapshot.paramMap.get('id');
+  subscription = this.searchService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
+    if (!resultingVideo) return;
+    const { snippet, statistics } = {
+      snippet: resultingVideo.items[0].snippet,
+      statistics: resultingVideo.items[0].statistics,
+    };
+    this.videoInfo = snippet;
+    this.statistics = statistics;
+  });
 
   constructor(
-    private videosService: VideosService,
+    private searchService: SearchService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
 
-  ngOnInit(): void {
-    if (!this.videoId) return;
-    const video = this.videosService.getVideo(this.videoId);
-    if (!video) return;
-    const { snippet, statistics } = {
-      snippet: video.snippet,
-      statistics: video.statistics,
-    };
-    this.videoInfo = snippet;
-    this.statistics = statistics;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   protected routeToHome() {

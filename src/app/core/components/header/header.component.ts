@@ -6,6 +6,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { ApiService } from '@core/services/api/api.service';
 import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
 import { AuthService } from '@features/auth/services/auth.service';
@@ -13,7 +14,9 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
 import {
-  debounceTime, Subscription
+  debounceTime, filter, Subscription,
+  switchMap,
+  tap
 } from 'rxjs';
 
 @Component({
@@ -45,16 +48,20 @@ export class HeaderComponent implements OnDestroy {
     }
   );
   private searchFormSubscription: Subscription = this.searchFormControl.valueChanges.pipe(
-    debounceTime(1000)
+    debounceTime(1000),
+    filter((value) => typeof value === 'string' && value.length >= 3),
+    switchMap((value) => this.apiService.searchVideos(value ?? '')),
+    tap((result) => {
+      this.searchService.videosList = result.items;
+      this.searchService.sortedResults = result.items;
+    })
   )
-    .subscribe((value) => {
-      if (!value) return;
-      this.searchService.searchByTitle(value);
-    });
+    .subscribe();
 
   constructor(
     protected searchService: SearchService,
     protected authService: AuthService,
+    private apiService: ApiService
   ) {}
 
   ngOnDestroy() {

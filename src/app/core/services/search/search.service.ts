@@ -5,7 +5,6 @@ import { defineSortOrder } from '@core/utils/define-sort-order';
 
 import { VideoInfo } from '../../interfaces/video-info';
 import { ApiService } from '../api/api.service';
-import { VideosService } from '../videos/videos.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,15 +12,9 @@ import { VideosService } from '../videos/videos.service';
 export class SearchService {
   public sortedResults: VideoInfo[] = [];
   public sortValue: string = '';
+  public videosList!: VideoInfo[];
 
-  constructor(private apiService: ApiService, private videosService: VideosService) {}
-
-  public searchByTitle(inputValue: string) {
-    this.apiService.searchVideos(inputValue ?? '').subscribe((value) => {
-      this.videosService.videosList = value.items;
-      this.sortedResults = value.items;
-    });
-  }
+  constructor(private apiService: ApiService) {}
 
   private sortByView(sortOrder: number) {
     this.sortedResults = this.sortedResults.sort((a, b) => {
@@ -60,5 +53,9 @@ export class SearchService {
 
   public setSortValue(value: string) {
     this.sortValue = value;
+  }
+
+  public getVideo(id: string) {
+    return this.apiService.getVideoInfo([id]);
   }
 }

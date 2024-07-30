@@ -7,14 +7,13 @@
           <mat-label>Search</mat-label>
           <input matInput type="text" [formControl]="searchFormControl" />
         </mat-form-field>
-        <!-- <app-button><span>Search</span></app-button> -->
       </form>
       <app-button (click)="toggleFilters()"
         ><mat-icon>sort</mat-icon></app-button
       >
     </div>
     <div class="header-login-info">
-      <div *ngIf="authService.isLoggedIn">
+      <div *ngIf="authService.isLoggedIn.value">
         <app-button (click)="authService.logout()"
           ><span>Logout</span></app-button
         >
