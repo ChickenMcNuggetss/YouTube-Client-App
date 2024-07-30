@@ -8,9 +8,9 @@ export function ApiInterceptor(
 ): Observable<HttpEvent<unknown>> {
   const modifiedReq = req.clone({
     url: `${environment.baseUrl}${req.url}`,
-    setHeaders: {
-      Authorization: `Bearer ${environment.apiKey}`
-    },
+    setParams: {
+      key: environment.apiKey
+    }
   });
   return next(modifiedReq);
 }

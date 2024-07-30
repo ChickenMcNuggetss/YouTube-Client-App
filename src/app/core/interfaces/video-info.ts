@@ -11,7 +11,10 @@ export interface VideoResponse {
 export interface VideoInfo {
   kind: string;
   etag: string;
-  id: string;
+  id: {
+    kind: string,
+    videoId: string,
+  };
   snippet: Snippet;
   statistics: Statistics;
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { VideoInfo } from '@core/interfaces/video-info';
-import { video } from '@features/youtube/video';
 // import { Observable } from 'rxjs/internal/Observable';
 
 // import { ApiService } from '../api/api.service';
@@ -9,9 +8,9 @@ import { video } from '@features/youtube/video';
   providedIn: 'root',
 })
 export class VideosService {
-  public videosList: VideoInfo[] = video;
+  public videosList!: VideoInfo[];
 
   public getVideo(id: string) {
-    return this.videosList.find((listItem) => listItem.id === id);
+    return this.videosList.find((listItem) => listItem.id.videoId === id);
   }
 }

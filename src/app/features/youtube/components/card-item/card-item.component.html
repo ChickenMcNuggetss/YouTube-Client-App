@@ -4,7 +4,7 @@
   [ngStyle]="{ 'border-bottom': borderColor }">
   <img
     mat-card-image
-    [src]="cardItem.snippet.thumbnails.maxres.url"
+    [src]="cardItem.snippet.thumbnails.high.url"
     [alt]="cardItem.snippet.title" />
   <mat-card-header>
     <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
@@ -28,7 +28,7 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <app-button [routerLink]="['/details', cardItem.id]"
+    <app-button [routerLink]="['/details', cardItem.id.videoId]"
       ><span>More...</span></app-button
     >
   </mat-card-actions>

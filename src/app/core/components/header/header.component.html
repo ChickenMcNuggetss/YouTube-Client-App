@@ -2,12 +2,12 @@
   <div class="header-container">
     <app-logo />
     <div class="header-search-container">
-      <form (ngSubmit)="search()" class="header-form">
+      <form class="header-form">
         <mat-form-field>
           <mat-label>Search</mat-label>
           <input matInput type="text" [formControl]="searchFormControl" />
         </mat-form-field>
-        <app-button><span>Search</span></app-button>
+        <!-- <app-button><span>Search</span></app-button> -->
       </form>
       <app-button (click)="toggleFilters()"
         ><mat-icon>sort</mat-icon></app-button

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { SortingVariant } from '@core/types/sorting-types';
 import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
-import { filterByTitle } from '@core/utils/filter-by-title';
 
 import { VideoInfo } from '../../interfaces/video-info';
+import { ApiService } from '../api/api.service';
 import { VideosService } from '../videos/videos.service';
 
 @Injectable({
@@ -14,13 +14,13 @@ export class SearchService {
   public sortedResults: VideoInfo[] = [];
   public sortValue: string = '';
 
-  constructor(private videosService: VideosService) {}
+  constructor(private apiService: ApiService, private videosService: VideosService) {}
 
   public searchByTitle(inputValue: string) {
-    this.sortedResults = filterByTitle(
-      this.videosService.videosList,
-      inputValue,
-    );
+    this.apiService.searchVideos(inputValue ?? '').subscribe((value) => {
+      this.videosService.videosList = value.items;
+      this.sortedResults = value.items;
+    });
   }
 
   private sortByView(sortOrder: number) {
