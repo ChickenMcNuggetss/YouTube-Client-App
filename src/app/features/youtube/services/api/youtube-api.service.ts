@@ -6,12 +6,11 @@ import { map, switchMap } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class YoutubeApiService {
   constructor(private http: HttpClient) {}
 
   public searchVideos(searchValue: string) {
     const params = {
-      part: 'snippet',
       type: 'video',
       q: searchValue
     };
@@ -32,7 +31,6 @@ export class ApiService {
         'statistics',
         'id'
       ],
-      resultsPerPage: 15,
       id: videoIds.join(','),
     };
     return this.http.get<VideoResponse>('/videos', { params });

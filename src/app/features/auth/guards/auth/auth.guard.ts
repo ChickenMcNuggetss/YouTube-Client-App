@@ -3,7 +3,7 @@ import { CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '@features/auth/services/auth.service';
 
 export const authGuard: CanMatchFn = () => {
-  const loginStatus = inject(AuthService).isLoggedIn.value;
+  const loginStatus = inject(AuthService).getUserState();
   const router = inject(Router);
 
   if (loginStatus) {

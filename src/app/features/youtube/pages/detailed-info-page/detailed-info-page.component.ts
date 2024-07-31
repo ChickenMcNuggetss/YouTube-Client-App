@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Snippet, Statistics } from '@core/interfaces/video-info';
-import { SearchService } from '@core/services/search/search.service';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
@@ -17,24 +17,21 @@ export class DetailedInfoPageComponent implements OnDestroy {
   protected videoInfo: Snippet | null = null;
   protected statistics: Statistics | null = null;
   private videoId = this.route.snapshot.paramMap.get('id');
-  subscription = this.searchService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
+  private getVideoSubscription = this.searchService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
     if (!resultingVideo) return;
-    const { snippet, statistics } = {
-      snippet: resultingVideo.items[0].snippet,
-      statistics: resultingVideo.items[0].statistics,
-    };
+    const { snippet, statistics } = resultingVideo.items[0];
     this.videoInfo = snippet;
     this.statistics = statistics;
   });
 
   constructor(
-    private searchService: SearchService,
+    private searchService: VideosService,
     private route: ActivatedRoute,
     private router: Router,
   ) {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.getVideoSubscription.unsubscribe();
   }
 
   protected routeToHome() {

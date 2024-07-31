@@ -1,7 +1,7 @@
 <div class="app-card-item-container">
   <app-card-item
     *ngFor="
-      let item of searchService.sortedResults | filter: searchService.sortValue
+      let item of searchService.getVideos() | filter: searchService.sortValue
     "
     [cardItem]="item"></app-card-item>
 </div>

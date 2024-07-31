@@ -2,22 +2,30 @@ import { Injectable } from '@angular/core';
 import { SortingVariant } from '@core/types/sorting-types';
 import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
+import { BehaviorSubject } from 'rxjs';
 
-import { VideoInfo } from '../../interfaces/video-info';
-import { ApiService } from '../api/api.service';
+import { VideoInfo } from '../../../../core/interfaces/video-info';
+import { YoutubeApiService } from '../api/youtube-api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SearchService {
-  public sortedResults: VideoInfo[] = [];
+export class VideosService {
+  private videos$ = new BehaviorSubject<VideoInfo[]>([]);
   public sortValue: string = '';
-  public videosList!: VideoInfo[];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: YoutubeApiService) {}
+
+  public getVideos() {
+    return this.videos$.value;
+  }
+
+  public setVideosValue(passedValue: VideoInfo[]) {
+    this.videos$.next(passedValue);
+  }
 
   private sortByView(sortOrder: number) {
-    this.sortedResults = this.sortedResults.sort((a, b) => {
+    this.videos$.next(this.videos$.value.sort((a, b) => {
       const firstCountValue = Number(a.statistics.viewCount);
       const secondCountValue = Number(b.statistics.viewCount);
       return defineSortCriteria({
@@ -25,11 +33,11 @@ export class SearchService {
         firstValue: firstCountValue,
         secondValue: secondCountValue,
       });
-    });
+    }));
   }
 
   private sortByDate(sortOrder: number) {
-    this.sortedResults = this.sortedResults.sort((a, b) => {
+    this.videos$.next(this.videos$.value.sort((a, b) => {
       const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
       const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
       return defineSortCriteria({
@@ -37,7 +45,7 @@ export class SearchService {
         firstValue: firstPublishDate,
         secondValue: secondPublishDate,
       });
-    });
+    }));
   }
 
   public sortBy(sortCriteria: SortingVariant) {

@@ -13,7 +13,7 @@
       >
     </div>
     <div class="header-login-info">
-      <div *ngIf="authService.isLoggedIn.value">
+      <div *ngIf="authService.getUserState()">
         <app-button (click)="authService.logout()"
           ><span>Logout</span></app-button
         >

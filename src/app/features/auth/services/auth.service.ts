@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '@core/services/storage/storage.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class AuthService {
     login: null,
     password: null,
   };
-  public isLoggedIn = new BehaviorSubject(false);
+  private isLoggedIn$ = new BehaviorSubject(false);
 
   constructor(
     private router: Router,
@@ -33,8 +33,11 @@ export class AuthService {
   }
 
   protected toggleUserState() {
-    this.isLoggedIn.next(!this.isLoggedIn.value);
-    return this.isLoggedIn;
+    this.isLoggedIn$.next(!this.isLoggedIn$.value);
+  }
+
+  public getUserState() {
+    return this.isLoggedIn$.value;
   }
 
   public logout() {
