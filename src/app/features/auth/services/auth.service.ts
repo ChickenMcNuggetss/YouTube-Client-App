@@ -11,7 +11,8 @@ export class AuthService {
     login: null,
     password: null,
   };
-  private isLoggedIn$ = new BehaviorSubject(false);
+  private isLoggedIn$$ = new BehaviorSubject(false);
+  public isLoggedIn$ = this.isLoggedIn$$.pipe();
 
   constructor(
     private router: Router,
@@ -33,11 +34,7 @@ export class AuthService {
   }
 
   protected toggleUserState() {
-    this.isLoggedIn$.next(!this.isLoggedIn$.value);
-  }
-
-  public getUserState() {
-    return this.isLoggedIn$.value;
+    this.isLoggedIn$$.next(!this.isLoggedIn$$.value);
   }
 
   public logout() {

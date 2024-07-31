@@ -15,8 +15,7 @@ import { ButtonToggleComponent } from '@shared/components/button-toggle/button-t
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
 import {
   debounceTime, filter, Subscription,
-  switchMap,
-  tap
+  switchMap
 } from 'rxjs';
 
 @Component({
@@ -62,11 +61,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       debounceTime(1000),
       filter((value) => typeof value === 'string' && value.length >= 3),
       switchMap((value) => this.apiService.searchVideos(value ?? '')),
-      tap((result) => {
-        this.videosService.setVideosValue(result.items);
-      })
     )
-      .subscribe());
+      .subscribe(
+        (result) => {
+          this.videosService.setVideosValue(result.items);
+        }
+      ));
   }
 
   ngOnDestroy() {

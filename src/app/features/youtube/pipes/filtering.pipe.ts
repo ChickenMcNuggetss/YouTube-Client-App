@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { Pipe, PipeTransform } from '@angular/core';
 import { VideoInfo } from '@core/interfaces/video-info';
 import { filterByTitle } from '@core/utils/filter-by-title';
@@ -7,7 +8,8 @@ import { filterByTitle } from '@core/utils/filter-by-title';
   standalone: true,
 })
 export class FilteringPipe implements PipeTransform {
-  transform(value: VideoInfo[], sortValue: string): VideoInfo[] {
+  transform(value: VideoInfo[] | null, sortValue: string): VideoInfo[] | undefined {
+    if (value === null) return;
     if (sortValue.trim() === '') {
       return value;
     }

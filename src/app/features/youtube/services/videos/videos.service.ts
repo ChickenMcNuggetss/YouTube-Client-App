@@ -11,21 +11,18 @@ import { YoutubeApiService } from '../api/youtube-api.service';
   providedIn: 'root',
 })
 export class VideosService {
-  private videos$ = new BehaviorSubject<VideoInfo[]>([]);
+  private videos$$ = new BehaviorSubject<VideoInfo[]>([]);
+  public videos$ = this.videos$$.pipe();
   public sortValue: string = '';
 
   constructor(private apiService: YoutubeApiService) {}
 
-  public getVideos() {
-    return this.videos$.value;
-  }
-
   public setVideosValue(passedValue: VideoInfo[]) {
-    this.videos$.next(passedValue);
+    this.videos$$.next(passedValue);
   }
 
   private sortByView(sortOrder: number) {
-    this.videos$.next(this.videos$.value.sort((a, b) => {
+    this.videos$$.next(this.videos$$.value.sort((a, b) => {
       const firstCountValue = Number(a.statistics.viewCount);
       const secondCountValue = Number(b.statistics.viewCount);
       return defineSortCriteria({
@@ -37,7 +34,7 @@ export class VideosService {
   }
 
   private sortByDate(sortOrder: number) {
-    this.videos$.next(this.videos$.value.sort((a, b) => {
+    this.videos$$.next(this.videos$$.value.sort((a, b) => {
       const firstPublishDate = new Date(a.snippet.publishedAt).getTime();
       const secondPublishDate = new Date(b.snippet.publishedAt).getTime();
       return defineSortCriteria({
