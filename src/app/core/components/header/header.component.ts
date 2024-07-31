@@ -1,18 +1,22 @@
-import { NgIf } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { SearchService } from '@core/services/search/search.service';
 import { SortingVariant } from '@core/types/sorting-types';
 import { AuthService } from '@features/auth/services/auth.service';
+import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.service';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
-import { Subscription } from 'rxjs';
+import {
+  debounceTime, filter, Subscription,
+  switchMap
+} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -29,39 +33,51 @@ import { Subscription } from 'rxjs';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    AsyncPipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent implements OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   protected areFiltersOpened = false;
   protected searchFormControl = new FormControl('');
   protected sortFormControl = new FormControl('');
-  private sortFormControlSubscription: Subscription = this.sortFormControl.valueChanges.subscribe(
-    (value) => {
-      this.searchService.setSortValue(value ?? '');
-    }
-  );
+  private subscription: Subscription = new Subscription();
 
   constructor(
-    protected searchService: SearchService,
+    protected videosService: VideosService,
     protected authService: AuthService,
+    private apiService: YoutubeApiService
   ) {}
 
+  ngOnInit() {
+    this.subscription.add(this.sortFormControl.valueChanges.subscribe(
+      (value) => {
+        this.videosService.setSortValue(value ?? '');
+      }
+    ));
+
+    this.subscription.add(this.searchFormControl.valueChanges.pipe(
+      debounceTime(1000),
+      filter((value) => typeof value === 'string' && value.length >= 3),
+      switchMap((value) => this.apiService.searchVideos(value ?? '')),
+    )
+      .subscribe(
+        (result) => {
+          this.videosService.setVideosValue(result.items);
+        }
+      ));
+  }
+
   ngOnDestroy() {
-    this.sortFormControlSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   protected toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  protected search() {
-    if (!this.searchFormControl.value) return;
-    this.searchService.searchByTitle(this.searchFormControl.value);
-  }
-
   protected sort(sortCriteria: SortingVariant) {
-    this.searchService.sortBy(sortCriteria);
+    this.videosService.sortBy(sortCriteria);
   }
 }

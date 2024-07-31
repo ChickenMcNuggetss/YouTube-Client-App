@@ -1,14 +1,15 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, Router } from '@angular/router';
 import { AuthService } from '@features/auth/services/auth.service';
+import { tap } from 'rxjs';
 
 export const authGuard: CanMatchFn = () => {
-  const loginStatus = inject(AuthService).isLoggedIn;
   const router = inject(Router);
-
-  if (loginStatus) {
-    return true;
-  }
-  router.navigateByUrl('login');
-  return false;
+  return inject(AuthService).isLoggedIn$.pipe(tap(
+    (value) => {
+      if (!value) {
+        router.navigateByUrl('login');
+      }
+    },
+  ));
 };
