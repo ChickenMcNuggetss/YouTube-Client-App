@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { ApiInterceptor } from '@core/interceptors/api-interceptor';
 
 import { routes } from './app.routes';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([ApiInterceptor])),
-  ],
+    provideStore()
+],
 };
