@@ -12,7 +12,8 @@ export class YoutubeApiService {
   public searchVideos(searchValue: string) {
     const params = {
       type: 'video',
-      q: searchValue
+      q: searchValue,
+      maxResults: '50'
     };
     return this.http.get<VideoResponse>('/search', { params })
       .pipe(
@@ -32,6 +33,7 @@ export class YoutubeApiService {
         'id'
       ],
       id: videoIds.join(','),
+      maxResults: '50'
     };
     return this.http.get<VideoResponse>('/videos', { params });
   }

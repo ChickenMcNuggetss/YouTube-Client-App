@@ -10,6 +10,7 @@ import { SortingVariant } from '@core/types/sorting-types';
 import { AuthService } from '@features/auth/services/auth.service';
 import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.service';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
@@ -17,6 +18,7 @@ import {
   debounceTime, filter, Subscription,
   switchMap
 } from 'rxjs';
+import { searchVideo } from 'app/store/actions/videos.actions';
 
 @Component({
   selector: 'app-header',
@@ -47,7 +49,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     protected videosService: VideosService,
     protected authService: AuthService,
-    private apiService: YoutubeApiService
+    private apiService: YoutubeApiService,
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -60,7 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.add(this.searchFormControl.valueChanges.pipe(
       debounceTime(1000),
       filter((value) => typeof value === 'string' && value.length >= 3),
-      switchMap((value) => this.apiService.searchVideos(value ?? '')),
+      switchMap((value) => this.apiService.searchVideos(value ?? ''); this.store.dispatch(searchVideo(result.items))),
     )
       .subscribe(
         (result) => {

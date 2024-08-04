@@ -13,9 +13,12 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { VideoInfo } from '@core/interfaces/video-info';
 import { getDateValidator } from '@features/admin/validators/get-date-validator';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
+import { addCard } from 'app/store/actions/admin.actions';
 
 function createTagItem() {
   return new FormGroup({
@@ -56,6 +59,8 @@ export class AdminPageComponent {
     tags: new FormArray([createTagItem()]),
   });
 
+  constructor(private store: Store) {}
+
   get title() {
     return this.createCardForm.get('title');
   }
@@ -95,5 +100,13 @@ export class AdminPageComponent {
     controlName: string,
   ) {
     return determineControlErrorText(control, controlName);
+  }
+
+  submitForm() {
+    if (this.createCardForm.value) {
+      this.store.dispatch(addCard(
+        { content: this.createCardForm.value as VideoInfo }
+      ));
+    }
   }
 }

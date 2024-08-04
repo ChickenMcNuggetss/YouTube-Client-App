@@ -1,6 +1,6 @@
 <div class="admin-page-container">
   <div class="admin-page-title"><strong>Create new card</strong></div>
-  <form [formGroup]="createCardForm" class="create-card-form">
+  <form [formGroup]="createCardForm" (ngSubmit)="submitForm()" class="create-card-form">
     <div class="create-card-form-controls-wrapper">
       <div class="create-card-form-controls-container">
         <mat-form-field>

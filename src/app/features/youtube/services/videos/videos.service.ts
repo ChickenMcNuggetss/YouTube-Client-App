@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { VideoInfo } from '@core/interfaces/video-info';
 import { SortingVariant } from '@core/types/sorting-types';
 import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
 import { BehaviorSubject } from 'rxjs';
 
-import { VideoInfo } from '../../../../core/interfaces/video-info';
 import { YoutubeApiService } from '../api/youtube-api.service';
 
 @Injectable({

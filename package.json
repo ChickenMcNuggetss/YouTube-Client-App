@@ -23,7 +23,10 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@ngrx/effects": "^18.0.2",
+    "@ngrx/entity": "^18.0.2",
     "@ngrx/store": "^18.0.2",
+    "@ngrx/store-devtools": "^18.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -39,6 +42,8 @@
     "@angular/compiler-cli": "^18.0.0",
     "@angular/language-server": "^18.0.0",
     "@netlify-builder/deploy": "^5.0.0",
+    "@ngrx/eslint-plugin": "^18.0.2",
+    "@ngrx/schematics": "^18.0.2",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
@@ -57,7 +62,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.3.2",
     "prettier-eslint": "^16.3.0",
-    "typescript": "~5.4.2",
-    "@ngrx/eslint-plugin": "^18.0.2"
+    "typescript": "~5.4.2"
   }
 }
