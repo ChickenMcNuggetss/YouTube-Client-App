@@ -38,7 +38,8 @@
           {
             "exceptMethods": [
               "transform",
-              "getErrorText"
+              "getErrorText",
+              "isCard"
             ]
           }
         ],

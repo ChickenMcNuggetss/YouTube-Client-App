@@ -1,27 +1,30 @@
-import { VideoInfo, VideoResponse } from '@core/interfaces/video-info';
+import { VideoResponse } from '@core/interfaces/video-info';
 import { createAction, props } from '@ngrx/store';
 
+import { YoutubeActions } from '../enums/youtube-actions';
+import { Card } from '../interfaces/card';
+
 export const addCard = createAction(
-  '[Admin Page] Creation Card',
-  props<{ content: VideoInfo }>()
+  YoutubeActions.AddCard,
+  props<{ content: Card }>()
 );
 
 export const deleteCard = createAction(
-  '[Admin Page] Deletion Card',
+  YoutubeActions.DeleteCard,
   props<{ id: string }>()
 );
 
-export const getYoutubeVideo = createAction(
-  '[Admin Page] Get Youtube video cards',
+export const videosLoaded = createAction(
+  YoutubeActions.VideosLoaded,
   props<{ content: VideoResponse }>()
 );
 
-export const searchVideo = createAction(
-  '[Main page] Search videos',
-  props<{ searchValue: string }>()
+export const videosLoadingError = createAction(
+  YoutubeActions.VideosLoadingError,
+  props<{ loadingError: Error }>()
 );
 
-export const getCurrentPage = createAction(
-  '[Main Page] Get current page',
-  props<{ currentPage: number }>()
+export const searchVideo = createAction(
+  YoutubeActions.SearchVideo,
+  props<{ searchValue: string }>()
 );

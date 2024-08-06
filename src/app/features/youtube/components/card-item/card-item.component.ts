@@ -10,6 +10,10 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 
 const BORDER_BOTTOM = '4px solid ';
 
+function getDifference(date: string) {
+  return Date.now() - new Date(date).valueOf();
+}
+
 @Component({
   selector: 'app-card-item',
   standalone: true,
@@ -30,7 +34,7 @@ export class CardItemComponent implements OnInit {
   @Input({ required: true }) cardItem!: VideoInfo;
 
   ngOnInit() {
-    const difference = Date.now() - new Date(this.cardItem.snippet.publishedAt).valueOf();
+    const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
   }
 }

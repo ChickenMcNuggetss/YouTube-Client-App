@@ -1,0 +1,17 @@
+<mat-card
+  appearance="outlined"
+  class="app-card"
+>
+  <img
+    mat-card-image
+    [src]="cardItem.imageLink"
+    [alt]="cardItem.title" />
+  <mat-card-header>
+    <mat-card-title>{{ cardItem.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <app-button [routerLink]="['/details', cardItem.id]"
+      ><span>More...</span></app-button>
+  </mat-card-actions>
+</mat-card>
+

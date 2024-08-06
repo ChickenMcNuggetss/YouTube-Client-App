@@ -13,12 +13,12 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { VideoInfo } from '@core/interfaces/video-info';
 import { getDateValidator } from '@features/admin/validators/get-date-validator';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
-import { addCard } from 'app/store/actions/admin.actions';
+import { addCard } from 'app/store/actions/videos.actions';
+import { Card } from 'app/store/interfaces/card';
 
 function createTagItem() {
   return new FormGroup({
@@ -105,7 +105,7 @@ export class AdminPageComponent {
   submitForm() {
     if (this.createCardForm.value) {
       this.store.dispatch(addCard(
-        { content: this.createCardForm.value as VideoInfo }
+        { content: this.createCardForm.value as Card }
       ));
     }
   }

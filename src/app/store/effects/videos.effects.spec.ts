@@ -2,21 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { VideosEffectsEffects } from './videos.effects';
+import { VideosEffects } from './videos.effects';
 
-describe('VideosEffectsEffects', () => {
+describe('VideosEffects', () => {
   let actions$: Observable<unknown>;
-  let effects: VideosEffectsEffects;
+  let effects: VideosEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        VideosEffectsEffects,
+        VideosEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.inject(VideosEffectsEffects);
+    effects = TestBed.inject(VideosEffects);
   });
 
   it('should be created', () => {
