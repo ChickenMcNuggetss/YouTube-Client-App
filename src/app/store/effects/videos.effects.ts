@@ -15,7 +15,6 @@ export class VideosEffects {
   searchVideos$ = createEffect(() => this.actions$.pipe(
     ofType(YoutubeActions.SearchVideo),
     exhaustMap((action: { searchValue: string, type: string }) => {
-      console.log('Effect received search value:', action.searchValue);
       return this.youtubeApiService.searchVideos(action.searchValue);
     }),
     map((videos) => {

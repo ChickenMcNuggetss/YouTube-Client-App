@@ -11,6 +11,8 @@ import { VideoInfo } from '@core/interfaces/video-info';
 import { Card } from 'app/store/interfaces/card';
 import { CustomVideoCardComponent } from '../custom-video-card/custom-video-card/custom-video-card.component';
 
+export type MixedList = VideoInfo | Card;
+
 @Component({
   selector: 'app-card-list',
   standalone: true,
@@ -32,7 +34,7 @@ export class CardListComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  isCard(item: VideoInfo | Card): boolean {
-    return (item as VideoInfo).statistics !== undefined;
+  isCard(item: MixedList): item is Card {
+    return (item as Card).creationDate !== undefined;
   }
 }

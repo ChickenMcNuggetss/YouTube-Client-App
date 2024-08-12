@@ -1,6 +1,9 @@
 <header class="header">
   <div class="header-container">
-    <app-logo />
+    <span>
+      <app-logo />
+      <app-button [routerLink]="['/admin']"><span>Admin</span></app-button>
+    </span>
     <div class="header-search-container">
       <form class="header-form">
         <mat-form-field>
@@ -18,6 +21,9 @@
           ><span>Logout</span></app-button
         >
       </div>
+      <app-button [routerLink]="['/favorites']"
+        ><mat-icon>favorite_border</mat-icon></app-button
+      >
       <span>Username</span>
       <mat-icon>account_circle</mat-icon>
     </div>

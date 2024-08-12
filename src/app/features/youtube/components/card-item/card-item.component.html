@@ -9,6 +9,13 @@
     [alt]="cardItem.snippet.title" />
   <mat-card-header>
     <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
+    <app-button (click)="addToFavorite()">
+      @if(isFavorite(cardItem.id.videoId)) {
+        <mat-icon>favorite_border</mat-icon>
+      } @else {
+        <mat-icon>favorite</mat-icon>
+      }
+    </app-button>
   </mat-card-header>
     <mat-card-content class="video-statistics">
       <div class="video-statistics-item">
@@ -29,7 +36,7 @@
       </div>
     </mat-card-content>
   <mat-card-actions>
-    <app-button [routerLink]="['/details', cardItem.id]"
+    <app-button [routerLink]="['/details', cardItem.id.videoId]"
       ><span>More...</span></app-button>
   </mat-card-actions>
 </mat-card>

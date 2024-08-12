@@ -1,10 +1,10 @@
 export interface VideoResponse {
-  kind: string,
-  etag: string,
+  kind: string;
+  etag: string;
   pageInfo: {
-    totalResults: number,
-    resultsPerPage: number
-  },
+    totalResults: number;
+    resultsPerPage: number;
+  };
   items: VideoInfo[]
 }
 
@@ -12,8 +12,8 @@ export interface VideoInfo {
   kind: string;
   etag: string;
   id: {
-    kind: string,
-    videoId: string,
+    kind: string;
+    videoId: string;
   };
   snippet: Snippet;
   statistics: Statistics;

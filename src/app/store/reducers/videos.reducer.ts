@@ -2,7 +2,7 @@ import { VideoInfo } from '@core/interfaces/video-info';
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  addCard, deleteCard, searchVideo, videosLoaded,
+  addCard, addToFavorites, deleteCard, deleteFromFavorites, searchVideo, videosLoaded,
   videosLoadingError
 } from '../actions/videos.actions';
 import { Card } from '../interfaces/card';
@@ -11,22 +11,16 @@ export interface YoutubeState {
   youtubeVideos: VideoInfo[],
   customVideos: Card[],
   error: Error | null,
-  valueSearch: string
+  valueSearch: string,
+  favoritesList: VideoInfo[]
 }
 
 const initialState: YoutubeState = {
   youtubeVideos: [],
-  customVideos: [{
-    id: 'hhhh',
-    creationDate: '2022-07-19T17:06:22Z',
-    description: 'aaaa',
-    imageLink: 'string',
-    tags: ['angular'],
-    title: 'angular',
-    videoLink: 'angular',
-  }],
+  customVideos: [],
   error: null,
-  valueSearch: ''
+  valueSearch: '',
+  favoritesList: []
 };
 
 export const videosReducer = createReducer(
@@ -50,5 +44,13 @@ export const videosReducer = createReducer(
   on(videosLoadingError, (state, { loadingError }): YoutubeState => ({
     ...state,
     error: loadingError
+  })),
+  on(addToFavorites, (state, { content }): YoutubeState => ({
+    ...state,
+    favoritesList: [...state.favoritesList, content]
+  })),
+  on(deleteFromFavorites, (state, { id }): YoutubeState => ({
+    ...state,
+    favoritesList: state.favoritesList.filter((video) => video.id.videoId !== id)
   }))
 );

@@ -6,7 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { VideoInfo } from '@core/interfaces/video-info';
 import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { addToFavorites, deleteFromFavorites } from 'app/store/actions/videos.actions';
+import { selectFavorites } from 'app/store/selectors/videos.selectors';
+import { map } from 'rxjs';
 
 const BORDER_BOTTOM = '4px solid ';
 
@@ -33,8 +37,27 @@ export class CardItemComponent implements OnInit {
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
+  constructor(private store: Store) {}
+
   ngOnInit() {
     const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
+  }
+
+  isFavorite(id: string) {
+    return this.store.select(selectFavorites).pipe(
+      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
+      map(
+        (favorites) => favorites.some((video) => video.id.videoId === id)
+      )
+    );
+  }
+
+  addToFavorite() {
+    if (!this.isFavorite(this.cardItem.id.videoId)) {
+      this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
+    } else {
+      this.store.dispatch(addToFavorites({ content: this.cardItem }));
+    }
   }
 }

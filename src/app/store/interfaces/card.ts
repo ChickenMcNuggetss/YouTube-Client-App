@@ -1,5 +1,5 @@
 export interface Card {
-  id: string,
+  id: string;
   creationDate: string,
   description: string,
   imageLink: string,

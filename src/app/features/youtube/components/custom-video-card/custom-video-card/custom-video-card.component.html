@@ -4,13 +4,14 @@
 >
   <img
     mat-card-image
-    [src]="cardItem.imageLink"
-    [alt]="cardItem.title" />
+    [src]="customCardItem.imageLink"
+    [alt]="customCardItem.title" />
   <mat-card-header>
-    <mat-card-title>{{ cardItem.title }}</mat-card-title>
+    <mat-card-title>{{ customCardItem.title }}</mat-card-title>
   </mat-card-header>
   <mat-card-actions>
-    <app-button [routerLink]="['/details', cardItem.id]"
+    <app-button (click)="deleteCustomCard(customCardItem.id)"><span>Delete</span></app-button>
+    <app-button [routerLink]="['/details', customCardItem.id]"
       ><span>More...</span></app-button>
   </mat-card-actions>
 </mat-card>

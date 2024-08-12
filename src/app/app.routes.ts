@@ -33,6 +33,12 @@ export const routes: Routes = [
     ),
   },
   {
+    path: 'favorites',
+    loadComponent: () => import('@features/youtube/pages/favorites-page/favorites-page.component').then(
+      (m) => m.FavoritesPageComponent,
+    ),
+  },
+  {
     path: '**',
     loadComponent: () => import('@core/components/page-not-found/page-not-found.component').then(
       (m) => m.PageNotFoundComponent,

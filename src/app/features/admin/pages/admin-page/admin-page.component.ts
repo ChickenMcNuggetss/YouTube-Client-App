@@ -14,6 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { getDateValidator } from '@features/admin/validators/get-date-validator';
+import { getId } from '@features/youtube/utils/get-id';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
@@ -44,6 +45,7 @@ function createTagItem() {
 })
 export class AdminPageComponent {
   protected createCardForm = new FormGroup({
+    id: new FormControl(getId()),
     title: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -104,6 +106,8 @@ export class AdminPageComponent {
 
   submitForm() {
     if (this.createCardForm.value) {
+      this.createCardForm.value.id = getId();
+      console.log(this.createCardForm.value);
       this.store.dispatch(addCard(
         { content: this.createCardForm.value as Card }
       ));

@@ -18,6 +18,7 @@ import {
   debounceTime, filter, of, Subscription,
   switchMap,
 } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ import {
     SvgLogoComponent,
     MatIconModule,
     NgIf,
+    RouterLink,
     MatButtonModule,
     MatChipsModule,
     ButtonToggleComponent,
@@ -62,7 +64,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       debounceTime(1000),
       filter((value) => typeof value === 'string' && value.length >= 3),
       switchMap((value) => {
-        console.log('Dispatching searchVideo with value:', value);
         this.store.dispatch(searchVideo({ searchValue: value ?? '' }));
         return of(value);
       })
@@ -82,14 +83,3 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.videosService.sortBy(sortCriteria);
   }
 }
-
-// this.subscription.add(this.searchFormControl.valueChanges.pipe(
-//   debounceTime(1000),
-//   filter((value) => typeof value === 'string' && value.length >= 3),
-//   switchMap((value) => this.apiService.searchVideos(value ?? '')),
-// )
-//   .subscribe(
-//     (result) => {
-//       this.videosService.setVideosValue(result.items);
-//     }
-//   ));
