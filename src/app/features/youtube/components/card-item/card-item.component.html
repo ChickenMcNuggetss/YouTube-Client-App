@@ -10,7 +10,7 @@
   <mat-card-header>
     <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
     <app-button (click)="addToFavorite()">
-      @if(isFavorite(cardItem.id.videoId)) {
+      @if(!isFav) {
         <mat-icon>favorite_border</mat-icon>
       } @else {
         <mat-icon>favorite</mat-icon>

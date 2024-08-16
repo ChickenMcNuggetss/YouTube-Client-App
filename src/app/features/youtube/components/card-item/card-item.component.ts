@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { addToFavorites, deleteFromFavorites } from 'app/store/actions/videos.actions';
 import { selectFavorites } from 'app/store/selectors/videos.selectors';
-import { map } from 'rxjs';
+import { filter, find, map, Subscription, tap } from 'rxjs';
 
 const BORDER_BOTTOM = '4px solid ';
 
@@ -34,6 +34,7 @@ function getDifference(date: string) {
 })
 export class CardItemComponent implements OnInit {
   protected borderColor: string | null = null;
+  protected isFav = false;
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
@@ -44,19 +45,17 @@ export class CardItemComponent implements OnInit {
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
   }
 
-  isFavorite(id: string) {
-    return this.store.select(selectFavorites).pipe(
-      // eslint-disable-next-line @ngrx/avoid-mapping-selectors
-      map(
-        (favorites) => favorites.some((video) => video.id.videoId === id)
-      )
-    );
+  isFavorite() {
+    this.store.select(selectFavorites).pipe()
   }
 
   addToFavorite() {
-    if (!this.isFavorite(this.cardItem.id.videoId)) {
+    console.log(this.isFav);
+    if (this.isFav) {
+      console.log('delete');
       this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
     } else {
+      console.log('add');
       this.store.dispatch(addToFavorites({ content: this.cardItem }));
     }
   }
