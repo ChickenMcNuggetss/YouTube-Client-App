@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '@core/services/storage/storage.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +10,8 @@ export class AuthService {
     login: null,
     password: null,
   };
-  private isLoggedIn$$ = new BehaviorSubject(false);
-  public isLoggedIn$ = this.isLoggedIn$$.pipe();
+  private readonly _isLoggedIn = signal(false);
+  public isLoggedIn = this._isLoggedIn.asReadonly();
 
   constructor(
     private router: Router,
@@ -34,7 +33,7 @@ export class AuthService {
   }
 
   protected toggleUserState() {
-    this.isLoggedIn$$.next(!this.isLoggedIn$$.value);
+    this._isLoggedIn.set(!this.isLoggedIn());
   }
 
   public logout() {

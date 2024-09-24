@@ -1,9 +1,6 @@
 <header class="header">
   <div class="header-container">
-    <span>
-      <app-logo />
-      <app-button [routerLink]="['/admin']"><span>Admin</span></app-button>
-    </span>
+    <app-logo />
     <div class="header-search-container">
       <form class="header-form">
         <mat-form-field>
@@ -16,7 +13,7 @@
       >
     </div>
     <div class="header-login-info">
-      <div *ngIf="authService.isLoggedIn$ | async">
+      <div *ngIf="isLoggedIn">
         <app-button (click)="authService.logout()"
           ><span>Logout</span></app-button
         >

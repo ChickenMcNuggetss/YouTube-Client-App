@@ -44,6 +44,8 @@ function createTagItem() {
   styleUrl: './admin-page.component.scss',
 })
 export class AdminPageComponent {
+  public maxDate = new Date(Date.now());
+
   protected createCardForm = new FormGroup({
     id: new FormControl(getId()),
     title: new FormControl('', [
@@ -107,7 +109,6 @@ export class AdminPageComponent {
   submitForm() {
     if (this.createCardForm.value) {
       this.createCardForm.value.id = getId();
-      console.log(this.createCardForm.value);
       this.store.dispatch(addCard(
         { content: this.createCardForm.value as Card }
       ));

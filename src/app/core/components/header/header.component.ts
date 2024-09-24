@@ -6,6 +6,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SortingVariant } from '@core/types/sorting-types';
 import { AuthService } from '@features/auth/services/auth.service';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
@@ -18,7 +19,6 @@ import {
   debounceTime, filter, of, Subscription,
   switchMap,
 } from 'rxjs';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -46,11 +46,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   protected searchFormControl = new FormControl('');
   protected sortFormControl = new FormControl('');
   private subscription: Subscription = new Subscription();
+  public isLoggedIn = this.authService.isLoggedIn();
 
   constructor(
     protected videosService: VideosService,
     protected authService: AuthService,
-    private store: Store
+    private store: Store,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -60,9 +62,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     ));
 
+    console.log(this.route.snapshot.url);
+
     this.subscription.add(this.searchFormControl.valueChanges.pipe(
       debounceTime(1000),
-      filter((value) => typeof value === 'string' && value.length >= 3),
+      filter((value) => this.isLoggedIn && typeof value === 'string' && value.length >= 3),
       switchMap((value) => {
         this.store.dispatch(searchVideo({ searchValue: value ?? '' }));
         return of(value);

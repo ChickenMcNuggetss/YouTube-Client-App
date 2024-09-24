@@ -14,9 +14,11 @@ import { YoutubeActions } from '../enums/youtube-actions';
 export class VideosEffects {
   searchVideos$ = createEffect(() => this.actions$.pipe(
     ofType(YoutubeActions.SearchVideo),
-    exhaustMap((action: { searchValue: string, type: string }) => {
-      return this.youtubeApiService.searchVideos(action.searchValue);
-    }),
+    exhaustMap(
+      (
+        action: { searchValue: string, type: string }
+      ) => this.youtubeApiService.searchVideos(action.searchValue)
+    ),
     map((videos) => {
       this.videosService.setVideosValue(videos.items);
       return videosLoaded(({ content: videos }));
