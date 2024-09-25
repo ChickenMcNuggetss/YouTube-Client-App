@@ -20,17 +20,19 @@ export type MixedList = VideoInfo | Card;
   styleUrl: './card-list.component.scss',
 })
 export class CardListComponent implements OnDestroy {
-  // private subscription: Subscription = new Subscription();
   protected videos$ = this.store.select(selectVideos);
   protected searchService = inject(VideosService);
 
-  constructor(private store: Store) {
-    // this.subscription.add(this.videos$.pipe()
-    //   .subscribe((data) => console.log(data)));
+  constructor(private store: Store, private videosService: VideosService) {
+    if (!this.videosService.isSearchActive()) {
+      this.videosService.toggleSearchFieldStatus();
+    }
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    if (this.videosService.isSearchActive()) {
+      this.videosService.toggleSearchFieldStatus();
+    }
   }
 
   isCard(item: MixedList): item is Card {

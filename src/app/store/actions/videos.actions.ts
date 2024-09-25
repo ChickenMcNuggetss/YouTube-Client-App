@@ -34,6 +34,11 @@ export const addToFavorites = createAction(
   props<{ content: VideoInfo }>()
 );
 
+export const searchInFavorites = createAction(
+  YoutubeActions.SearchInFavorites,
+  props<{ content: VideoInfo }>()
+);
+
 export const deleteFromFavorites = createAction(
   YoutubeActions.DeleteFromFavorites,
   props<{ id: string }>()

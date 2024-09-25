@@ -19,7 +19,8 @@ export class VideosService {
   constructor(private apiService: YoutubeApiService) {}
 
   public setVideosValue(passedValue: VideoInfo[]) {
-    this.videos$$.set(passedValue);
+    const updatedVideos = [...new Set([...this.videos$$(), ...passedValue])];
+    this.videos$$.set(updatedVideos);
   }
 
   public toggleSearchFieldStatus() {

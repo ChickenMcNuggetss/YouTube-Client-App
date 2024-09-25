@@ -5,5 +5,6 @@ export const enum YoutubeActions {
   VideosLoadingError = '[Main page] Videos loading error',
   SearchVideo = '[Main page] Search videos',
   AddToFavorites = '[Main page] Add to favorites',
+  SearchInFavorites = '[Main page] Search in favorites',
   DeleteFromFavorites = '[Main page] Delete from favorites'
 }

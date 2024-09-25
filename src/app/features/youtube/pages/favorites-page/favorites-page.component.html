@@ -1,5 +1,5 @@
 <ng-container>
-  @for (video of favoritesVideos$ | async; track video) {
+  @for (video of favoritesVideos$ | async; track video.id) {
     <app-card-item [cardItem]="video"></app-card-item>
   }
 </ng-container>

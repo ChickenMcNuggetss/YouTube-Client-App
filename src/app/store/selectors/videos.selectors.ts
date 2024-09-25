@@ -15,4 +15,7 @@ export const selectVideos = createSelector(
   (custom, youtubeVideos) => [...custom, ...youtubeVideos] as MixedList[]
 );
 
-export const selectFavorites = createSelector(selectYoutubeState, (youtube) => youtube.favoritesList);
+export const selectFavorites = createSelector(
+  selectYoutubeState,
+  (youtube) => youtube.favoritesList
+);

@@ -57,10 +57,12 @@ export class CardItemComponent implements OnInit {
   addToFavorite() {
     console.log(this.isFav);
     if (this.isFav) {
+      this.isFav = !this.isFav;
       console.log('delete');
       this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
     } else {
       console.log('add');
+      this.isFav = !this.isFav;
       this.store.dispatch(addToFavorites({ content: this.cardItem }));
     }
   }

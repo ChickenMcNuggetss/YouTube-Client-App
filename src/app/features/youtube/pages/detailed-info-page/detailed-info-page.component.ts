@@ -28,18 +28,14 @@ export class DetailedInfoPageComponent implements OnDestroy {
     private videosService: VideosService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnDestroy(): void {
     this.getVideoSubscription.unsubscribe();
   }
 
   routeToHome() {
-    this.setVideosStatus();
     this.router.navigate(['']);
-  }
-
-  setVideosStatus() {
-    this.videosService.toggleSearchFieldStatus();
   }
 }
