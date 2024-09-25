@@ -1,7 +1,9 @@
 <div class="app-card-item-container">
-  <app-card-item
-    *ngFor="
-      let item of (searchService.videos$ | async) | filter: searchService.sortValue
-    "
-    [cardItem]="item"></app-card-item>
+  <ng-container *ngFor="let item of ((videos$ | async) | filter: searchService.sortValue)">
+    @if (!isCard(item)) {
+      <app-card-item [cardItem]="item"></app-card-item>
+    } @else {
+      <app-custom-video-card [customCardItem]="item"></app-custom-video-card>
+    }
+  </ng-container>
 </div>

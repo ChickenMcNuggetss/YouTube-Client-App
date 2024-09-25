@@ -1,35 +1,42 @@
 <mat-card
   appearance="outlined"
   class="app-card"
-  [ngStyle]="{ 'border-bottom': borderColor }">
+  [ngStyle]="{ 'border-bottom': borderColor }"
+>
   <img
     mat-card-image
     [src]="cardItem.snippet.thumbnails.high.url"
     [alt]="cardItem.snippet.title" />
   <mat-card-header>
     <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
+    <app-button (click)="addToFavorite()">
+      @if(!isFav) {
+        <mat-icon>favorite_border</mat-icon>
+      } @else if(isFav) {
+        <mat-icon>favorite</mat-icon>
+      }
+    </app-button>
   </mat-card-header>
-  <mat-card-content class="video-statistics">
-    <div class="video-statistics-item">
-      <mat-icon>remove_red_eye</mat-icon
-      ><span>{{ cardItem.statistics.viewCount }}</span>
-    </div>
-    <div class="video-statistics-item">
-      <mat-icon>thumb_up</mat-icon
-      ><span>{{ cardItem.statistics.likeCount }}</span>
-    </div>
-    <div class="video-statistics-item">
-      <mat-icon>thumb_down</mat-icon
-      ><span>{{ cardItem.statistics.dislikeCount }}</span>
-    </div>
-    <div class="video-statistics-item">
-      <mat-icon>comment</mat-icon
-      ><span>{{ cardItem.statistics.commentCount }}</span>
-    </div>
-  </mat-card-content>
+    <mat-card-content class="video-statistics">
+      <div class="video-statistics-item">
+        <mat-icon>remove_red_eye</mat-icon
+        ><span>{{ cardItem.statistics.viewCount }}</span>
+      </div>
+      <div class="video-statistics-item">
+        <mat-icon>thumb_up</mat-icon
+        ><span>{{ cardItem.statistics.likeCount }}</span>
+      </div>
+      <div class="video-statistics-item">
+        <mat-icon>thumb_down</mat-icon
+        ><span>{{ cardItem.statistics.dislikeCount }}</span>
+      </div>
+      <div class="video-statistics-item">
+        <mat-icon>comment</mat-icon
+        ><span>{{ cardItem.statistics.commentCount }}</span>
+      </div>
+    </mat-card-content>
   <mat-card-actions>
-    <app-button [routerLink]="['/details', cardItem.id]"
-      ><span>More...</span></app-button
-    >
+    <app-button [routerLink]="['/details', cardItem.id]" (click)="setVideosStatus()"
+      ><span>More...</span></app-button>
   </mat-card-actions>
 </mat-card>

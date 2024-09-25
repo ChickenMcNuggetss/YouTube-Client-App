@@ -17,7 +17,7 @@ export class DetailedInfoPageComponent implements OnDestroy {
   protected videoInfo: Snippet | null = null;
   protected statistics: Statistics | null = null;
   private videoId = this.route.snapshot.paramMap.get('id');
-  private getVideoSubscription = this.searchService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
+  private getVideoSubscription = this.videosService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
     if (!resultingVideo) return;
     const { snippet, statistics } = resultingVideo.items[0];
     this.videoInfo = snippet;
@@ -25,16 +25,17 @@ export class DetailedInfoPageComponent implements OnDestroy {
   });
 
   constructor(
-    private searchService: VideosService,
+    private videosService: VideosService,
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnDestroy(): void {
     this.getVideoSubscription.unsubscribe();
   }
 
-  protected routeToHome() {
+  routeToHome() {
     this.router.navigate(['']);
   }
 }

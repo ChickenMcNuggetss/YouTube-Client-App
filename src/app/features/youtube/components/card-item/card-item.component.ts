@@ -5,10 +5,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { VideoInfo } from '@core/interfaces/video-info';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { addToFavorites, deleteFromFavorites } from 'app/store/actions/videos.actions';
+import { selectFavorites } from 'app/store/selectors/videos.selectors';
 
 const BORDER_BOTTOM = '4px solid ';
+
+function getDifference(date: string) {
+  return Date.now() - new Date(date).valueOf();
+}
 
 @Component({
   selector: 'app-card-item',
@@ -26,11 +34,36 @@ const BORDER_BOTTOM = '4px solid ';
 })
 export class CardItemComponent implements OnInit {
   protected borderColor: string | null = null;
+  protected isFav = false;
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
+  constructor(private store: Store, private videosService: VideosService) {}
+
   ngOnInit() {
-    const difference = Date.now() - new Date(this.cardItem.snippet.publishedAt).valueOf();
+    console.log(this.cardItem.id.videoId, this.cardItem.id);
+    const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
+  }
+
+  isFavorite() {
+    this.store.select(selectFavorites).pipe();
+  }
+
+  setVideosStatus() {
+    this.videosService.toggleSearchFieldStatus();
+  }
+
+  addToFavorite() {
+    console.log(this.isFav);
+    if (this.isFav) {
+      this.isFav = !this.isFav;
+      console.log('delete');
+      this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
+    } else {
+      console.log('add');
+      this.isFav = !this.isFav;
+      this.store.dispatch(addToFavorites({ content: this.cardItem }));
+    }
   }
 }

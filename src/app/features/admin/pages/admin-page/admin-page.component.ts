@@ -14,8 +14,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { getDateValidator } from '@features/admin/validators/get-date-validator';
+import { getId } from '@features/youtube/utils/get-id';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
+import { addCard } from 'app/store/actions/videos.actions';
+import { Card } from 'app/store/interfaces/card';
 
 function createTagItem() {
   return new FormGroup({
@@ -40,7 +44,10 @@ function createTagItem() {
   styleUrl: './admin-page.component.scss',
 })
 export class AdminPageComponent {
+  public maxDate = new Date(Date.now());
+
   protected createCardForm = new FormGroup({
+    id: new FormControl(getId()),
     title: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -55,6 +62,8 @@ export class AdminPageComponent {
     ]),
     tags: new FormArray([createTagItem()]),
   });
+
+  constructor(private store: Store) {}
 
   get title() {
     return this.createCardForm.get('title');
@@ -95,5 +104,14 @@ export class AdminPageComponent {
     controlName: string,
   ) {
     return determineControlErrorText(control, controlName);
+  }
+
+  submitForm() {
+    if (this.createCardForm.value) {
+      this.createCardForm.value.id = getId();
+      this.store.dispatch(addCard(
+        { content: this.createCardForm.value as Card }
+      ));
+    }
   }
 }

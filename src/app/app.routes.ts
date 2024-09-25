@@ -19,6 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import(
       '@features/youtube/pages/detailed-info-page/detailed-info-page.component'
     ).then((m) => m.DetailedInfoPageComponent),
+    canMatch: [authGuard],
   },
   {
     path: 'login',
@@ -31,6 +32,13 @@ export const routes: Routes = [
     loadComponent: () => import('@features/admin/pages/admin-page/admin-page.component').then(
       (m) => m.AdminPageComponent,
     ),
+  },
+  {
+    path: 'favorites',
+    loadComponent: () => import('@features/youtube/pages/favorites-page/favorites-page.component').then(
+      (m) => m.FavoritesPageComponent,
+    ),
+    canMatch: [authGuard],
   },
   {
     path: '**',

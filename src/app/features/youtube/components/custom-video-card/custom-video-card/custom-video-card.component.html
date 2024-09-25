@@ -1,0 +1,18 @@
+<mat-card
+  appearance="outlined"
+  class="app-card"
+>
+  <img
+    mat-card-image
+    [src]="customCardItem.imageLink"
+    [alt]="customCardItem.title" />
+  <mat-card-header>
+    <mat-card-title>{{ customCardItem.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <app-button (click)="deleteCustomCard(customCardItem.id)"><span>Delete</span></app-button>
+    <app-button [routerLink]="['/details', customCardItem.id]"
+      ><span>More...</span></app-button>
+  </mat-card-actions>
+</mat-card>
+
