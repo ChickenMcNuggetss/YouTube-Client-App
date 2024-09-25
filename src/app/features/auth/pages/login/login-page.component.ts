@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '@features/auth/services/auth.service';
 import { getPasswordValidator } from '@features/auth/validators/get-password-validator';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
 
@@ -38,10 +39,11 @@ export class LoginPageComponent {
     ]),
   });
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private videosService: VideosService) {}
 
   protected submitLoginForm() {
     if (this.form.invalid) return;
+    this.videosService.toggleSearchFieldStatus();
     this.authService.submitLoginForm({
       login: this.form.value.login ?? '',
       password: this.form.value.password ?? '',

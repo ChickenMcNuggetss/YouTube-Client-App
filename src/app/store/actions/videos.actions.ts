@@ -32,9 +32,9 @@ export const searchVideo = createAction(
 export const addToFavorites = createAction(
   YoutubeActions.AddToFavorites,
   props<{ content: VideoInfo }>()
-)
+);
 
 export const deleteFromFavorites = createAction(
   YoutubeActions.DeleteFromFavorites,
   props<{ id: string }>()
-)
+);

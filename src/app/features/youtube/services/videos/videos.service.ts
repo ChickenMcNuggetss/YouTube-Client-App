@@ -3,7 +3,6 @@ import { VideoInfo } from '@core/interfaces/video-info';
 import { SortingVariant } from '@core/types/sorting-types';
 import { defineSortCriteria } from '@core/utils/define-sort-criteria';
 import { defineSortOrder } from '@core/utils/define-sort-order';
-import { BehaviorSubject } from 'rxjs';
 
 import { YoutubeApiService } from '../api/youtube-api.service';
 
@@ -13,12 +12,18 @@ import { YoutubeApiService } from '../api/youtube-api.service';
 export class VideosService {
   private videos$$ = signal<VideoInfo[]>([]);
   public videos$ = this.videos$$.asReadonly();
+  private _isSearchActive = signal<boolean>(false);
+  public isSearchActive = this._isSearchActive.asReadonly();
   public sortValue: string = '';
 
   constructor(private apiService: YoutubeApiService) {}
 
   public setVideosValue(passedValue: VideoInfo[]) {
     this.videos$$.set(passedValue);
+  }
+
+  public toggleSearchFieldStatus() {
+    this._isSearchActive.set(!this._isSearchActive());
   }
 
   private sortByView(sortOrder: number) {

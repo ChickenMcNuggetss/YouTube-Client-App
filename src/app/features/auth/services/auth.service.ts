@@ -33,7 +33,8 @@ export class AuthService {
   }
 
   protected toggleUserState() {
-    this._isLoggedIn.set(!this.isLoggedIn());
+    const newValue = !this.isLoggedIn();
+    this._isLoggedIn.set(newValue);
   }
 
   public logout() {

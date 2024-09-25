@@ -1,14 +1,13 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
+import { VideoInfo } from '@core/interfaces/video-info';
 import { FilteringPipe } from '@features/youtube/pipes/filtering.pipe';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { Store } from '@ngrx/store';
+import { Card } from 'app/store/interfaces/card';
 import { selectVideos } from 'app/store/selectors/videos.selectors';
-import { Subscription } from 'rxjs';
 
 import { CardItemComponent } from '../card-item/card-item.component';
-import { VideoInfo } from '@core/interfaces/video-info';
-import { Card } from 'app/store/interfaces/card';
 import { CustomVideoCardComponent } from '../custom-video-card/custom-video-card/custom-video-card.component';
 
 export type MixedList = VideoInfo | Card;

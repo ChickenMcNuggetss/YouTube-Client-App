@@ -1,24 +1,26 @@
 <header class="header">
   <div class="header-container">
     <app-logo />
-    <div class="header-search-container">
-      <form class="header-form">
-        <mat-form-field>
-          <mat-label>Search</mat-label>
-          <input matInput type="text" [formControl]="searchFormControl" />
-        </mat-form-field>
-      </form>
-      <app-button (click)="toggleFilters()"
-        ><mat-icon>sort</mat-icon></app-button
-      >
-    </div>
+    @if(videosService.isSearchActive()) {
+      <div class="header-search-container">
+        <form class="header-form">
+          <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput type="text" [formControl]="searchFormControl" />
+          </mat-form-field>
+        </form>
+        <app-button (click)="toggleFilters()"
+          ><mat-icon>sort</mat-icon></app-button
+        >
+      </div>
+    }
     <div class="header-login-info">
       <div *ngIf="isLoggedIn">
         <app-button (click)="authService.logout()"
           ><span>Logout</span></app-button
         >
       </div>
-      <app-button [routerLink]="['/favorites']"
+      <app-button [routerLink]="['/favorites']" (click)="setVideosStatus()"
         ><mat-icon>favorite_border</mat-icon></app-button
       >
       <span>Username</span>

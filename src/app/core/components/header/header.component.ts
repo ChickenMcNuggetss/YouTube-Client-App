@@ -1,12 +1,16 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component, OnDestroy, OnInit
+} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import {
+  RouterLink
+} from '@angular/router';
 import { SortingVariant } from '@core/types/sorting-types';
 import { AuthService } from '@features/auth/services/auth.service';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
@@ -52,7 +56,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     protected videosService: VideosService,
     protected authService: AuthService,
     private store: Store,
-    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -62,17 +65,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     ));
 
-    console.log(this.route.snapshot.url);
-
     this.subscription.add(this.searchFormControl.valueChanges.pipe(
       debounceTime(1000),
-      filter((value) => this.isLoggedIn && typeof value === 'string' && value.length >= 3),
+      filter((value) => typeof value === 'string' && value.length >= 3),
       switchMap((value) => {
         this.store.dispatch(searchVideo({ searchValue: value ?? '' }));
         return of(value);
       })
     )
-      .subscribe());
+      .subscribe(() => console.log(this.isLoggedIn)));
   }
 
   ngOnDestroy() {
@@ -81,6 +82,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   protected toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
+  }
+
+  setVideosStatus() {
+    this.videosService.toggleSearchFieldStatus();
   }
 
   protected sort(sortCriteria: SortingVariant) {

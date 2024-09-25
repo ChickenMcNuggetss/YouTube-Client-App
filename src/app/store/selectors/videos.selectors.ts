@@ -1,7 +1,7 @@
+import { MixedList } from '@features/youtube/components/card-list/card-list.component';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { YoutubeState } from '../reducers/videos.reducer';
-import { MixedList } from '@features/youtube/components/card-list/card-list.component';
 
 const selectYoutubeState = createFeatureSelector<YoutubeState>('youtube');
 

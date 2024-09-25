@@ -12,14 +12,14 @@ export const routes: Routes = [
     loadComponent: () => import('@features/youtube/pages/main-page/main-page.component').then(
       (m) => m.MainPageComponent,
     ),
-    // canMatch: [authGuard],
+    canMatch: [authGuard],
   },
   {
     path: 'details/:id',
     loadComponent: () => import(
       '@features/youtube/pages/detailed-info-page/detailed-info-page.component'
     ).then((m) => m.DetailedInfoPageComponent),
-    // canMatch: [authGuard],
+    canMatch: [authGuard],
   },
   {
     path: 'login',
@@ -38,7 +38,7 @@ export const routes: Routes = [
     loadComponent: () => import('@features/youtube/pages/favorites-page/favorites-page.component').then(
       (m) => m.FavoritesPageComponent,
     ),
-    // canMatch: [authGuard],
+    canMatch: [authGuard],
   },
   {
     path: '**',

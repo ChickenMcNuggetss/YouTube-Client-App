@@ -10,7 +10,7 @@ describe('CustomVideoCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [CustomVideoCardComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CustomVideoCardComponent);
     component = fixture.componentInstance;

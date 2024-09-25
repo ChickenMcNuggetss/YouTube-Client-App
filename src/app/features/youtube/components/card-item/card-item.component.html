@@ -36,7 +36,7 @@
       </div>
     </mat-card-content>
   <mat-card-actions>
-    <app-button [routerLink]="['/details', cardItem.id.videoId]"
+    <app-button [routerLink]="['/details', cardItem.id]" (click)="setVideosStatus()"
       ><span>More...</span></app-button>
   </mat-card-actions>
 </mat-card>

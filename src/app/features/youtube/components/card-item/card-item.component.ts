@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { VideoInfo } from '@core/interfaces/video-info';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
@@ -37,15 +38,20 @@ export class CardItemComponent implements OnInit {
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private videosService: VideosService) {}
 
   ngOnInit() {
+    console.log(this.cardItem.id.videoId, this.cardItem.id);
     const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
   }
 
   isFavorite() {
     this.store.select(selectFavorites).pipe();
+  }
+
+  setVideosStatus() {
+    this.videosService.toggleSearchFieldStatus();
   }
 
   addToFavorite() {
