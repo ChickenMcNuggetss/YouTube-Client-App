@@ -41,7 +41,6 @@ export class CardItemComponent implements OnInit {
   constructor(private store: Store, private videosService: VideosService) {}
 
   ngOnInit() {
-    console.log(this.cardItem.id.videoId, this.cardItem.id);
     const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
   }
@@ -55,13 +54,10 @@ export class CardItemComponent implements OnInit {
   }
 
   addToFavorite() {
-    console.log(this.isFav);
     if (this.isFav) {
       this.isFav = !this.isFav;
-      console.log('delete');
       this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
     } else {
-      console.log('add');
       this.isFav = !this.isFav;
       this.store.dispatch(addToFavorites({ content: this.cardItem }));
     }

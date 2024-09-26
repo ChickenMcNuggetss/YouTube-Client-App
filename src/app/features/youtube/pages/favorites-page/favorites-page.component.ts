@@ -15,7 +15,5 @@ import { selectFavorites } from 'app/store/selectors/videos.selectors';
 export class FavoritesPageComponent {
   protected favoritesVideos$ = this.store.select(selectFavorites);
 
-  constructor(private store: Store, private videosService: VideosService) {
-    this.favoritesVideos$.subscribe((videos) => console.log(videos));
-  }
+  constructor(private store: Store, private videosService: VideosService) {}
 }
