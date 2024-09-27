@@ -1,10 +1,8 @@
-import type { Config } from 'jest';
-
 const { defaultTransformerOptions } = require('jest-preset-angular/presets');
 
-const jestConfig: Config = {
+module.exports = {
   preset: 'jest-preset-angular',
-  setupFilesAfterEnv: ['src/setup-jest.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/setup-jest.ts'],
   transformIgnorePatterns: ['node_modules/(?!@angular|@ngrx)'],
   transform: {
     '^.+\\.(ts|js|mjs|html|svg)$': [
@@ -18,5 +16,3 @@ const jestConfig: Config = {
     ],
 },
 };
-
-export default jestConfig;
