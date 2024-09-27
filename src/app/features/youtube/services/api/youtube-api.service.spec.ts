@@ -80,7 +80,7 @@ describe('ApiService', () => {
     const videoReq = httpMock.expectOne((req) => req.url === '/videos');
     expect(videoReq.request.method).toBe('GET');
     expect(videoReq.request.params.get('id')).toBe('video1,video2');
-    expect(videoReq.request.params.get('part')).toBe('snippet,statistics,id');
+    expect(videoReq.request.params.get('part')).toBe('snippet');
 
     videoReq.flush(mockVideoInfoResponse);
   });

@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -18,9 +18,10 @@
     "importHelpers": true,
     "target": "ES2022",
     "paths": {
-      "@shared/*": ["./app/shared/*"],
-      "@features/*": ["./app/features/*"],
-      "@core/*": ["./app/core/*"]
+      "@shared/*": ["src/app/shared/*"],
+      "@features/*": ["src/app/features/*"],
+      "@core/*": ["src/app/core/*"],
+      "@store/*": ["src/app/store/*"]
     },
     "module": "ES2022",
     "useDefineForClassFields": false,

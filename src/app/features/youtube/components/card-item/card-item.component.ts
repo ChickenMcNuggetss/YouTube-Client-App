@@ -9,8 +9,8 @@ import { VideosService } from '@features/youtube/services/videos/videos.service'
 import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { addToFavorites, deleteFromFavorites } from 'app/store/actions/videos.actions';
-import { selectFavorites } from 'app/store/selectors/videos.selectors';
+import { addToFavorites, deleteFromFavorites } from '@store/actions/videos.actions';
+import { selectFavorites } from '@store/selectors/videos.selectors';
 
 const BORDER_BOTTOM = '4px solid ';
 

@@ -18,11 +18,11 @@ import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
-import { searchVideo } from 'app/store/actions/videos.actions';
 import {
   debounceTime, filter, of, Subscription,
   switchMap,
 } from 'rxjs';
+import { searchVideo } from '@store/actions/videos.actions';
 
 @Component({
   selector: 'app-header',

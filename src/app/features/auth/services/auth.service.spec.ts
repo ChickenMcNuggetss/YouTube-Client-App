@@ -2,6 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { StorageService } from '@core/services/storage/storage.service';
 
 import { AuthService } from './auth.service';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('LoginService', () => {
   let service: AuthService;
@@ -13,9 +15,13 @@ describe('LoginService', () => {
   };
 
   beforeEach(() => {
-    TestBed.configureTestingModule(
-      { providers: [{ provide: StorageService, useValue: storageServiceMock }] }
-    );
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: StorageService, useValue: storageServiceMock },
+      ],
+    });
     service = TestBed.inject(AuthService);
   });
 

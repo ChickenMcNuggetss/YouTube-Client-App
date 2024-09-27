@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CardItemComponent } from '@features/youtube/components/card-item/card-item.component';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { Store } from '@ngrx/store';
-import { selectFavorites } from 'app/store/selectors/videos.selectors';
+import { selectFavorites } from '@store/selectors/videos.selectors';
 
 @Component({
   selector: 'app-favorites-page',
