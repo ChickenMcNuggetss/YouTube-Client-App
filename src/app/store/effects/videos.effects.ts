@@ -20,6 +20,7 @@ export class VideosEffects {
       ) => this.youtubeApiService.searchVideos(action.searchValue)
     ),
     map((videos) => {
+      console.log(videos);
       this.videosService.setVideosValue(videos.items);
       return videosLoaded(({ content: videos }));
     }),

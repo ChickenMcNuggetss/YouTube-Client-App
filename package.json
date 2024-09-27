@@ -8,27 +8,11 @@
     "lint": "ng lint",
     "lint fix": "ng lint --fix",
     "format": "npx prettier --write .",
-    "test": "jest",
+    "test": "jest --no-cache",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
   "private": true,
-  "jest": {
-    "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setup.jest.ts"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/dist/"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "<rootDir>/tsconfig.spec.json",
-        "stringifyContentPathRegex": "\\.html$"
-      }
-    }
-  },
   "dependencies": {
     "@angular/animations": "^18.0.0",
     "@angular/cdk": "^18.0.6",
@@ -73,6 +57,7 @@
     "jest-preset-angular": "^14.2.4",
     "prettier": "^3.3.2",
     "prettier-eslint": "^16.3.0",
+    "ts-jest": "^29.2.5",
     "typescript": "~5.4.2"
   }
 }

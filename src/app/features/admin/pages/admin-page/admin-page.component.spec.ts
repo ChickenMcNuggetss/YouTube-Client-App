@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { getDateValidator } from '@features/admin/validators/get-date-validator';
 
 import { AdminPageComponent } from './admin-page.component';
 
@@ -9,6 +10,7 @@ describe('AdminPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AdminPageComponent],
+      providers: [{ provide: getDateValidator, useValue: () => {} }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminPageComponent);
