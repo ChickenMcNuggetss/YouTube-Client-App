@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { provideRouter } from '@angular/router';
+import { Snippet, Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
 
 describe('CardItemComponent', () => {
   let component: CardItemComponent;
@@ -14,6 +15,39 @@ describe('CardItemComponent', () => {
   let store: MockStore;
 
   let initialState = {};
+
+  let cardItemMock = {
+    kind: 'string',
+    etag: 'string',
+    id: {
+      kind: 'string',
+      videoId: 'string',
+    },
+    snippet: {
+      publishedAt: '',
+      channelId: '',
+      title: '',
+      description: '',
+      thumbnails: {
+        default: {} as ThumbnailVariant,
+        medium: {} as ThumbnailVariant,
+        high: {} as ThumbnailVariant,
+        standard: {} as ThumbnailVariant,
+        maxres: {} as ThumbnailVariant,
+      },
+      channelTitle: '',
+      tags: [''],
+      categoryId: '',
+      defaultLanguage: '',
+      liveBroadcastContent: '',
+      localized: {
+        title: '',
+        description: '',
+      },
+      defaultAudioLanguage: '',
+    },
+    statistics: {} as Statistics,
+  }
 
   const videosServiceMock = {
     setVideosValue: jest.fn(),
@@ -34,6 +68,7 @@ describe('CardItemComponent', () => {
     fixture = TestBed.createComponent(CardItemComponent);
     store = TestBed.inject(MockStore);
     component = fixture.componentInstance;
+    component.cardItem = cardItemMock;
     fixture.detectChanges();
     fixture.debugElement.injector.get(Store);
   });

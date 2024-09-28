@@ -12,6 +12,16 @@ describe('CustomVideoCardComponent', () => {
 
   const initialState = {};
 
+  const customCardItemMock = {
+    id: '',
+    creationDate: '',
+    description: '',
+    imageLink: '',
+    tags: [''],
+    title: '',
+    videoLink: '',
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CustomVideoCardComponent],
@@ -24,6 +34,7 @@ describe('CustomVideoCardComponent', () => {
 
     fixture = TestBed.createComponent(CustomVideoCardComponent);
     component = fixture.componentInstance;
+    component.customCardItem = customCardItemMock;
     fixture.detectChanges();
     fixture.debugElement.injector.get(Store);
   });

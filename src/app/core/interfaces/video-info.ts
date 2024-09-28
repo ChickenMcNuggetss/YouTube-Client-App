@@ -51,7 +51,7 @@ export interface Statistics {
   commentCount: string;
 }
 
-interface ThumbnailVariant {
+export interface ThumbnailVariant {
   url: string;
   width: number;
   height: number;
