@@ -4,6 +4,7 @@ import { getDateValidator } from '@features/admin/validators/get-date-validator'
 import { AdminPageComponent } from './admin-page.component';
 import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;
@@ -16,7 +17,7 @@ describe('AdminPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AdminPageComponent],
-      providers: [{ provide: getDateValidator, useValue: () => {} }, provideMockStore({initialState})]
+      providers: [provideAnimations(), { provide: getDateValidator, useValue: () => {} }, provideMockStore({initialState})]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminPageComponent);
