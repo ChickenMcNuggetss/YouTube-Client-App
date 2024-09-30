@@ -19,7 +19,7 @@ export class VideosService {
   constructor(private apiService: YoutubeApiService) {}
 
   public setVideosValue(passedValue: VideoInfo[]) {
-    const updatedVideos = [...new Set([...this.videos$$(), ...passedValue])];
+    const updatedVideos = [...this.videos$$(), ...passedValue];
     this.videos$$.set(updatedVideos);
   }
 

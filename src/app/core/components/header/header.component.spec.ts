@@ -8,6 +8,8 @@ import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { HeaderComponent } from './header.component';
 import { Store } from '@ngrx/store';
 import { provideRouter } from '@angular/router';
+import { By } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -34,6 +36,7 @@ describe('HeaderComponent', () => {
       providers: [
         provideRouter([]),
         provideHttpClient(),
+        provideAnimations(),
         provideHttpClientTesting(),
         provideMockStore({initialState}),
         { provide: AuthService, useValue: authServiceMock },
@@ -49,5 +52,14 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should toggle filters state', () => {
+    expect(fixture.debugElement.query(By.css('.header-filters'))).toBeFalsy();
+    expect(component.areFiltersOpened).toBe(false);
+    component.toggleFilters();
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.header-filters'))).toBeTruthy();
+    expect(component.areFiltersOpened).toBe(true);
   });
 });

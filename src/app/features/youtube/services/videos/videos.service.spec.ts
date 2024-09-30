@@ -17,4 +17,8 @@ describe('SearchService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get videos', () => {
+    expect(service.videos$()).toBeTruthy();
+  });
 });

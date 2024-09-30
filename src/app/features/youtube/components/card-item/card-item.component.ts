@@ -34,7 +34,7 @@ function getDifference(date: string) {
 })
 export class CardItemComponent implements OnInit {
   protected borderColor: string | null = null;
-  protected isFav = false;
+  public isFav = false;
 
   @Input({ required: true }) cardItem!: VideoInfo;
 

@@ -70,10 +70,15 @@ describe('CardItemComponent', () => {
     component = fixture.componentInstance;
     component.cardItem = cardItemMock;
     fixture.detectChanges();
-    fixture.debugElement.injector.get(Store);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should change heart icons', () => {
+    expect(component.isFav).toBeFalsy();
+    component.isFav = true;
+    expect(component.isFav).toBeTruthy();
   });
 });

@@ -46,9 +46,9 @@ import { searchVideo } from '@store/actions/videos.actions';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  protected areFiltersOpened = false;
-  protected searchFormControl = new FormControl('');
-  protected sortFormControl = new FormControl('');
+  public areFiltersOpened = false;
+  public searchFormControl = new FormControl('');
+  public sortFormControl = new FormControl('');
   private subscription: Subscription = new Subscription();
   public isLoggedIn = this.authService.isLoggedIn();
 
@@ -80,15 +80,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  protected toggleFilters() {
+  public toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  setVideosStatus() {
+  public setVideosStatus() {
     this.videosService.toggleSearchFieldStatus();
   }
 
-  protected sort(sortCriteria: SortingVariant) {
+  public sort(sortCriteria: SortingVariant) {
     this.videosService.sortBy(sortCriteria);
   }
 }

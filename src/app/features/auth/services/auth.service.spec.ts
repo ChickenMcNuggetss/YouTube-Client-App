@@ -28,4 +28,8 @@ describe('LoginService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should get logged in status', () => {
+    expect(service.isLoggedIn()).toBeFalsy();
+  });
 });
