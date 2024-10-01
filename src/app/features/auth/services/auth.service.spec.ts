@@ -4,6 +4,7 @@ import { StorageService } from '@core/services/storage/storage.service';
 import { AuthService } from './auth.service';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
 
 describe('LoginService', () => {
   let service: AuthService;
@@ -29,7 +30,34 @@ describe('LoginService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get logged in status', () => {
-    expect(service.isLoggedIn()).toBeFalsy();
+  it('should login successfully', () => {
+    service.submitLoginForm({
+      login: 'login@login.com',
+      password: 'password#$R3',
+    });
+    expect(service.isLoggedIn()).toBeTruthy();
   });
+
+  it('should toggle user state', () => {
+    expect(service.isLoggedIn()).toBeFalsy();
+    service.submitLoginForm({
+      login: 'login@login.com',
+      password: 'password#$R3',
+    });
+    expect(service.isLoggedIn()).toBeTruthy();
+  })
 });
+
+// public submitLoginForm({
+//   login,
+//   password,
+// }: {
+//   login: string;
+//   password: string;
+// }) {
+//   this.loginData = { login, password };
+//   if (!this.loginData.login) return;
+//   this.storageService.set('authToken', this.loginData.login);
+//   this.toggleUserState();
+//   this.router.navigate(['main']);
+// }
