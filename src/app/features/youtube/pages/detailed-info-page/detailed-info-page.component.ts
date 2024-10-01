@@ -14,8 +14,8 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   styleUrl: './detailed-info-page.component.scss',
 })
 export class DetailedInfoPageComponent implements OnDestroy {
-  protected videoInfo: Snippet | null = null;
-  protected statistics: Statistics | null = null;
+  public videoInfo: Snippet | null = null;
+  public statistics: Statistics | null = null;
   private videoId = this.route.snapshot.paramMap.get('id');
   private getVideoSubscription = this.videosService.getVideo(this.videoId ?? '').subscribe((resultingVideo) => {
     if (!resultingVideo) return;

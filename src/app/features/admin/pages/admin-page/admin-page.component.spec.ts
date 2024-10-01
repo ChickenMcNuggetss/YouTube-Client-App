@@ -29,4 +29,10 @@ describe('AdminPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should add tag', () => {
+    const prevLength = component.tags.length;
+    component.addTag();
+    expect(component.tags.length > prevLength).toBe(true);
+  });
 });

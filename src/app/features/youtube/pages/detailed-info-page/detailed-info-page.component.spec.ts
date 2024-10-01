@@ -4,10 +4,45 @@ import { DetailedInfoPageComponent } from './detailed-info-page.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
+import { ThumbnailVariant, Statistics } from '@core/interfaces/video-info';
+import { By } from '@angular/platform-browser';
 
 describe('DetailedInfoPageComponent', () => {
   let component: DetailedInfoPageComponent;
   let fixture: ComponentFixture<DetailedInfoPageComponent>;
+
+  let cardItemMock = {
+    kind: 'string',
+    etag: 'string',
+    id: {
+      kind: 'string',
+      videoId: 'string',
+    },
+    snippet: {
+      publishedAt: '',
+      channelId: '',
+      title: '',
+      description: '',
+      thumbnails: {
+        default: {} as ThumbnailVariant,
+        medium: {} as ThumbnailVariant,
+        high: {} as ThumbnailVariant,
+        standard: {} as ThumbnailVariant,
+        maxres: {} as ThumbnailVariant,
+      },
+      channelTitle: '',
+      tags: [''],
+      categoryId: '',
+      defaultLanguage: '',
+      liveBroadcastContent: '',
+      localized: {
+        title: '',
+        description: '',
+      },
+      defaultAudioLanguage: '',
+    },
+    statistics: {} as Statistics,
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,5 +57,12 @@ describe('DetailedInfoPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have videos info', () => {
+    component.videoInfo = cardItemMock.snippet;
+    component.statistics = cardItemMock.statistics;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('.detailed-info-container'))).toBeTruthy();
   });
 });

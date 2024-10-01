@@ -89,7 +89,7 @@ export class AdminPageComponent {
     return this.createCardForm.get('tags') as FormArray;
   }
 
-  protected addTag() {
+  public addTag() {
     if (this.tags.length > 4) return;
     this.tags.push(createTagItem());
   }

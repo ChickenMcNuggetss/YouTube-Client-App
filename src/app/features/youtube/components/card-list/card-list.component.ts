@@ -20,7 +20,7 @@ export type MixedList = VideoInfo | Card;
   styleUrl: './card-list.component.scss',
 })
 export class CardListComponent implements OnDestroy {
-  protected videos$ = this.store.select(selectVideos);
+  public videos$ = this.store.select(selectVideos);
   protected searchService = inject(VideosService);
 
   constructor(private store: Store, private videosService: VideosService) {
