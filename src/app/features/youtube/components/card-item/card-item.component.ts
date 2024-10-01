@@ -34,7 +34,7 @@ function getDifference(date: string) {
 })
 export class CardItemComponent implements OnInit {
   protected borderColor: string | null = null;
-  public isFav = false;
+  public isFavoriteVideo = false;
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
@@ -54,11 +54,11 @@ export class CardItemComponent implements OnInit {
   }
 
   addToFavorite() {
-    if (this.isFav) {
-      this.isFav = !this.isFav;
+    if (this.isFavoriteVideo) {
+      this.isFavoriteVideo = !this.isFavoriteVideo;
       this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
     } else {
-      this.isFav = !this.isFav;
+      this.isFavoriteVideo = !this.isFavoriteVideo;
       this.store.dispatch(addToFavorites({ content: this.cardItem }));
     }
   }

@@ -6,7 +6,6 @@ import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.se
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 
 import { HeaderComponent } from './header.component';
-import { Store } from '@ngrx/store';
 import { provideRouter } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';

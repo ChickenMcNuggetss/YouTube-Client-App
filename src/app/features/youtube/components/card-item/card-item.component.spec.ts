@@ -1,20 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardItemComponent } from './card-item.component';
-import { Store } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { provideRouter } from '@angular/router';
-import { Snippet, Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
+import { Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
 
 describe('CardItemComponent', () => {
   let component: CardItemComponent;
   let fixture: ComponentFixture<CardItemComponent>;
-  let store: MockStore;
-
-  let initialState = {};
 
   let cardItemMock = {
     kind: 'string',
@@ -62,11 +58,10 @@ describe('CardItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CardItemComponent],
-      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting(), provideMockStore({ initialState }), { provide: VideosService, useValue: videosServiceMock }],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting(), provideMockStore(), { provide: VideosService, useValue: videosServiceMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardItemComponent);
-    store = TestBed.inject(MockStore);
     component = fixture.componentInstance;
     component.cardItem = cardItemMock;
     fixture.detectChanges();
@@ -74,11 +69,5 @@ describe('CardItemComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should change heart icons', () => {
-    expect(component.isFav).toBeFalsy();
-    component.isFav = true;
-    expect(component.isFav).toBeTruthy();
   });
 });

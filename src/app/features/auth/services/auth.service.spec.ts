@@ -47,17 +47,3 @@ describe('LoginService', () => {
     expect(service.isLoggedIn()).toBeTruthy();
   })
 });
-
-// public submitLoginForm({
-//   login,
-//   password,
-// }: {
-//   login: string;
-//   password: string;
-// }) {
-//   this.loginData = { login, password };
-//   if (!this.loginData.login) return;
-//   this.storageService.set('authToken', this.loginData.login);
-//   this.toggleUserState();
-//   this.router.navigate(['main']);
-// }

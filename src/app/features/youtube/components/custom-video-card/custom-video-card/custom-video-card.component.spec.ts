@@ -1,16 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { CustomVideoCardComponent } from './custom-video-card.component';
-import { Store } from '@ngrx/store';
 import { provideRouter } from '@angular/router';
 
 describe('CustomVideoCardComponent', () => {
   let component: CustomVideoCardComponent;
   let fixture: ComponentFixture<CustomVideoCardComponent>;
-  let store: MockStore;
-
-  const initialState = {};
 
   const customCardItemMock = {
     id: '',
@@ -27,7 +23,7 @@ describe('CustomVideoCardComponent', () => {
       imports: [CustomVideoCardComponent],
       providers: [
         provideRouter([]),
-        provideMockStore({initialState}),
+        provideMockStore(),
       ]
     })
       .compileComponents();
@@ -36,7 +32,6 @@ describe('CustomVideoCardComponent', () => {
     component = fixture.componentInstance;
     component.customCardItem = customCardItemMock;
     fixture.detectChanges();
-    fixture.debugElement.injector.get(Store);
   });
 
   it('should create', () => {
