@@ -6,8 +6,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { deleteCard } from 'app/store/actions/videos.actions';
-import { Card } from 'app/store/interfaces/card';
+import { deleteCard } from '@store/actions/videos.actions';
+import { Card } from '@store/interfaces/card';
 
 @Component({
   selector: 'app-custom-video-card',

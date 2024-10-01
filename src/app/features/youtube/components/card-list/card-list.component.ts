@@ -4,11 +4,11 @@ import { VideoInfo } from '@core/interfaces/video-info';
 import { FilteringPipe } from '@features/youtube/pipes/filtering.pipe';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { Store } from '@ngrx/store';
-import { Card } from 'app/store/interfaces/card';
-import { selectVideos } from 'app/store/selectors/videos.selectors';
 
 import { CardItemComponent } from '../card-item/card-item.component';
 import { CustomVideoCardComponent } from '../custom-video-card/custom-video-card/custom-video-card.component';
+import { Card } from '@store/interfaces/card';
+import { selectVideos } from '@store/selectors/videos.selectors';
 
 export type MixedList = VideoInfo | Card;
 
@@ -20,7 +20,7 @@ export type MixedList = VideoInfo | Card;
   styleUrl: './card-list.component.scss',
 })
 export class CardListComponent implements OnDestroy {
-  protected videos$ = this.store.select(selectVideos);
+  public videos$ = this.store.select(selectVideos);
   protected searchService = inject(VideosService);
 
   constructor(private store: Store, private videosService: VideosService) {

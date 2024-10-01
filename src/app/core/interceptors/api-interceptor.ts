@@ -1,6 +1,6 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
-import { environment } from 'environment';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environment';
 
 export function ApiInterceptor(
   req: HttpRequest<unknown>,

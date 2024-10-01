@@ -18,8 +18,8 @@ import { getId } from '@features/youtube/utils/get-id';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { determineControlErrorText } from '@shared/utils/determine-error-text';
-import { addCard } from 'app/store/actions/videos.actions';
-import { Card } from 'app/store/interfaces/card';
+import { addCard } from '@store/actions/videos.actions';
+import { Card } from '@store/interfaces/card';
 
 function createTagItem() {
   return new FormGroup({
@@ -89,7 +89,7 @@ export class AdminPageComponent {
     return this.createCardForm.get('tags') as FormArray;
   }
 
-  protected addTag() {
+  public addTag() {
     if (this.tags.length > 4) return;
     this.tags.push(createTagItem());
   }

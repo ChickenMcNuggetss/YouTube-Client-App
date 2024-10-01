@@ -18,11 +18,11 @@ import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { ButtonToggleComponent } from '@shared/components/button-toggle/button-toggle.component';
 import { SvgLogoComponent } from '@shared/components/logo/logo.component';
-import { searchVideo } from 'app/store/actions/videos.actions';
 import {
   debounceTime, filter, of, Subscription,
   switchMap,
 } from 'rxjs';
+import { searchVideo } from '@store/actions/videos.actions';
 
 @Component({
   selector: 'app-header',
@@ -46,9 +46,9 @@ import {
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  protected areFiltersOpened = false;
-  protected searchFormControl = new FormControl('');
-  protected sortFormControl = new FormControl('');
+  public areFiltersOpened = false;
+  public searchFormControl = new FormControl('');
+  public sortFormControl = new FormControl('');
   private subscription: Subscription = new Subscription();
   public isLoggedIn = this.authService.isLoggedIn();
 
@@ -80,15 +80,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  protected toggleFilters() {
+  public toggleFilters() {
     this.areFiltersOpened = !this.areFiltersOpened;
   }
 
-  setVideosStatus() {
+  public setVideosStatus() {
     this.videosService.toggleSearchFieldStatus();
   }
 
-  protected sort(sortCriteria: SortingVariant) {
+  public sort(sortCriteria: SortingVariant) {
     this.videosService.sortBy(sortCriteria);
   }
 }
