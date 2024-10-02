@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { VideoInfo } from '@core/interfaces/video-info';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { getColorByPublishDate } from '@features/youtube/utils/get-color-by-publish-date';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { addToFavorites, deleteFromFavorites } from '@store/actions/videos.actions';
@@ -34,7 +35,8 @@ export class CardItemComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private videosService: VideosService
+    private videosService: VideosService,
+    private destroy: DestroyRef
   ) {}
 
   ngOnInit() {
@@ -43,9 +45,12 @@ export class CardItemComponent implements OnInit {
 
     this.store
       .select(selectFavorites)
-      .pipe(tap((videos) => {
-        this.isFavoriteVideo = videos.find((video) => video.id === this.cardItem.id) ? true : false
-      }))
+      .pipe(
+        tap((videos) => {
+          this.isFavoriteVideo = videos.find((video) => video.id === this.cardItem.id) ? true : false;
+        }),
+        takeUntilDestroyed(this.destroy)
+      )
       .subscribe();
   }
 
