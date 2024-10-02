@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { addToFavorites, deleteFromFavorites } from '@store/actions/videos.actions';
 import { selectFavorites } from '@store/selectors/videos.selectors';
+import { filter, tap } from 'rxjs';
 
 const BORDER_BOTTOM = '4px solid ';
 
@@ -21,14 +22,7 @@ function getDifference(date: string) {
 @Component({
   selector: 'app-card-item',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    ButtonComponent,
-    MatIconModule,
-    NgStyle,
-    RouterLink,
-  ],
+  imports: [MatCardModule, MatButtonModule, ButtonComponent, MatIconModule, NgStyle, RouterLink],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
@@ -38,15 +32,21 @@ export class CardItemComponent implements OnInit {
 
   @Input({ required: true }) cardItem!: VideoInfo;
 
-  constructor(private store: Store, private videosService: VideosService) {}
+  constructor(
+    private store: Store,
+    private videosService: VideosService
+  ) {}
 
   ngOnInit() {
     const difference = getDifference(this.cardItem.snippet.publishedAt);
     this.borderColor = BORDER_BOTTOM + getColorByPublishDate(difference);
-  }
 
-  isFavorite() {
-    this.store.select(selectFavorites).pipe();
+    this.store
+      .select(selectFavorites)
+      .pipe(tap((videos) => {
+        this.isFavoriteVideo = videos.find((video) => video.id === this.cardItem.id) ? true : false
+      }))
+      .subscribe();
   }
 
   setVideosStatus() {
