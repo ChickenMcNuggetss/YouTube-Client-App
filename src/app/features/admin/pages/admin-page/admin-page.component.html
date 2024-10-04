@@ -14,9 +14,7 @@
           <mat-label>Description</mat-label>
           <input matInput type="text" formControlName="description" />
           @if (description?.invalid) {
-            <mat-error>{{
-              getErrorText(description, 'description')
-            }}</mat-error>
+            <mat-error>{{ getErrorText(description, 'description') }}</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
@@ -35,27 +33,17 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Video's creation date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="creationDatePicker"
-            [max]="maxDate"
-            formControlName="creationDate" />
+          <input matInput [matDatepicker]="creationDatePicker" [max]="maxDate" formControlName="creationDate" />
           <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="creationDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matIconSuffix [for]="creationDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #creationDatePicker disabled="false"></mat-datepicker>
           @if (creationDate?.invalid) {
-            <mat-error>{{
-              getErrorText(creationDate, 'creation date')
-            }}</mat-error>
+            <mat-error>{{ getErrorText(creationDate, 'creation date') }}</mat-error>
           }
         </mat-form-field>
       </div>
       <div class="create-card-form-controls-container">
-        <div
-          formArrayName="tags"
-          *ngFor="let tag of tags.controls; let i = index">
+        <div formArrayName="tags" *ngFor="let tag of tags.controls; let i = index">
           <div [formGroupName]="i">
             <mat-form-field>
               <mat-label>Tag</mat-label>
@@ -67,9 +55,7 @@
       </div>
     </div>
     <div class="button-container">
-      <app-button (click)="resetCreateCardForm()"
-        ><span>Reset</span></app-button
-      >
+      <app-button (click)="resetCreateCardForm()"><span>Reset</span></app-button>
       <app-button type="submit"><span>Create card</span></app-button>
     </div>
   </form>

@@ -1,10 +1,9 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StorageService } from '@core/services/storage/storage.service';
 
 import { AuthService } from './auth.service';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { Component } from '@angular/core';
 
 describe('LoginService', () => {
   let service: AuthService;
@@ -45,5 +44,5 @@ describe('LoginService', () => {
       password: 'password#$R3',
     });
     expect(service.isLoggedIn()).toBeTruthy();
-  })
+  });
 });

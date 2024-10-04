@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { DetailedInfoPageComponent } from './detailed-info-page.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { provideRouter } from '@angular/router';
-import { ThumbnailVariant, Statistics } from '@core/interfaces/video-info';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
+
+import { DetailedInfoPageComponent } from './detailed-info-page.component';
 
 describe('DetailedInfoPageComponent', () => {
   let component: DetailedInfoPageComponent;
   let fixture: ComponentFixture<DetailedInfoPageComponent>;
 
-  let cardItemMock = {
+  const cardItemMock = {
     kind: 'string',
     etag: 'string',
     id: {
@@ -42,7 +42,7 @@ describe('DetailedInfoPageComponent', () => {
       defaultAudioLanguage: '',
     },
     statistics: {} as Statistics,
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { CustomVideoCardComponent } from './custom-video-card.component';
-import { provideRouter } from '@angular/router';
 
 describe('CustomVideoCardComponent', () => {
   let component: CustomVideoCardComponent;
@@ -16,7 +16,7 @@ describe('CustomVideoCardComponent', () => {
     tags: [''],
     title: '',
     videoLink: '',
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

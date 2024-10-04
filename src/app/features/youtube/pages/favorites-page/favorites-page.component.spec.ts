@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FavoritesPageComponent } from './favorites-page.component';
-import { provideMockStore } from '@ngrx/store/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { provideMockStore } from '@ngrx/store/testing';
+
+import { FavoritesPageComponent } from './favorites-page.component';
 
 describe('FavoritesPageComponent', () => {
   let component: FavoritesPageComponent;
@@ -18,7 +18,7 @@ describe('FavoritesPageComponent', () => {
     sortBy: jest.fn(),
     setSortValue: jest.fn(),
     getVideo: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
