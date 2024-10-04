@@ -1,16 +1,18 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { AuthService } from '@features/auth/services/auth.service';
-import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.service';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
-
-import { HeaderComponent } from './header.component';
-import { provideRouter } from '@angular/router';
+import {
+  ComponentFixture, fakeAsync, TestBed, tick
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { provideRouter } from '@angular/router';
+import { AuthService } from '@features/auth/services/auth.service';
+import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.service';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { searchVideo } from '@store/actions/videos.actions';
+import { of } from 'rxjs';
+
+import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -72,7 +74,6 @@ describe('HeaderComponent', () => {
     expect(spyOnControl).toHaveBeenCalled();
   });
 
-
   it('should subscribe on sortFormControl value change', () => {
     const spyOnSortControl = jest.spyOn(component.sortFormControl.valueChanges, 'subscribe');
     component.ngOnInit();
@@ -80,7 +81,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should dispatch store', fakeAsync(() => {
-    const spyOnDispatch = jest.spyOn(store, 'dispatch')
+    const spyOnDispatch = jest.spyOn(store, 'dispatch');
     component.searchFormControl.setValue('angular');
     fixture.detectChanges();
     tick(1000);

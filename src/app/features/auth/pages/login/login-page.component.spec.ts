@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthService } from '@features/auth/services/auth.service';
-
-import { LoginPageComponent } from './login-page.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { VideosService } from '@features/youtube/services/videos/videos.service';
-import { provideRouter } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { AuthService } from '@features/auth/services/auth.service';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
 import { provideMockStore } from '@ngrx/store/testing';
+
+import { LoginPageComponent } from './login-page.component';
 
 describe('LoginComponent', () => {
   let component: LoginPageComponent;

@@ -1,9 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { ThumbnailVariant, VideoInfo } from '@core/interfaces/video-info';
 
 import { VideosService } from './videos.service';
-import { Statistics, ThumbnailVariant, VideoInfo } from '@core/interfaces/video-info';
 
 describe('SearchService', () => {
   let service: VideosService;
@@ -104,7 +104,7 @@ describe('SearchService', () => {
         favoriteCount: '',
         commentCount: '',
       },
-    }]
+    }];
     service.setVideosValue(videosMockData);
     service.sortBy('date asc');
     expect(service.videos$()[0].snippet.publishedAt).toBe('2022-02-01');

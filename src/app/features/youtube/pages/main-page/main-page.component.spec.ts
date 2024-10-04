@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MainPageComponent } from './main-page.component';
-import { provideMockStore } from '@ngrx/store/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { provideMockStore } from '@ngrx/store/testing';
+
+import { MainPageComponent } from './main-page.component';
 
 describe('MainPageComponent', () => {
   let component: MainPageComponent;
@@ -19,7 +19,7 @@ describe('MainPageComponent', () => {
     sortBy: jest.fn(),
     setSortValue: jest.fn(),
     getVideo: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

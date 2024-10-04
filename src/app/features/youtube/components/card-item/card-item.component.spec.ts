@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CardItemComponent } from './card-item.component';
-import { provideMockStore } from '@ngrx/store/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { provideMockStore } from '@ngrx/store/testing';
+
+import { CardItemComponent } from './card-item.component';
 
 describe('CardItemComponent', () => {
   let component: CardItemComponent;
   let fixture: ComponentFixture<CardItemComponent>;
 
-  let cardItemMock = {
+  const cardItemMock = {
     kind: 'string',
     etag: 'string',
     id: {
@@ -43,7 +43,7 @@ describe('CardItemComponent', () => {
       defaultAudioLanguage: '',
     },
     statistics: {} as Statistics,
-  }
+  };
 
   const videosServiceMock = {
     setVideosValue: jest.fn(),
@@ -53,7 +53,7 @@ describe('CardItemComponent', () => {
     sortBy: jest.fn(),
     setSortValue: jest.fn(),
     getVideo: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

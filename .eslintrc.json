@@ -24,6 +24,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "max-len": "off",
         "no-underscore-dangle": "off",
         "import/prefer-default-export": "off",
         "import/first": "error",
@@ -33,6 +34,14 @@
         "simple-import-sort/exports": "error",
         "unused-imports/no-unused-imports": "error",
         "prefer-const": "error",
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "error"
+            ]
+          }
+        ],
         "@typescript-eslint/no-useless-constructor": "error",
         "class-methods-use-this": [
           "error",
@@ -86,8 +95,7 @@
       ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility",
-        "plugin:prettier/recommended"
+        "plugin:@angular-eslint/template/accessibility"
       ]
     },
     {

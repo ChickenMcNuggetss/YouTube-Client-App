@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { getDateValidator } from '@features/admin/validators/get-date-validator';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { AdminPageComponent } from './admin-page.component';
-import { provideMockStore } from '@ngrx/store/testing';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;

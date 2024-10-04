@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CardListComponent } from './card-list.component';
-import { provideMockStore } from '@ngrx/store/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { VideosService } from '@features/youtube/services/videos/videos.service';
+import { provideMockStore } from '@ngrx/store/testing';
+
+import { CardListComponent } from './card-list.component';
 
 describe('CardListComponent', () => {
   let component: CardListComponent;
@@ -20,7 +20,7 @@ describe('CardListComponent', () => {
     sortBy: jest.fn(),
     setSortValue: jest.fn(),
     getVideo: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

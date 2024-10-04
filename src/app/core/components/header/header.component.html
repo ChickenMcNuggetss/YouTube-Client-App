@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header-container">
     <app-logo />
-    @if(videosService.isSearchActive()) {
+    @if (videosService.isSearchActive()) {
       <div class="header-search-container">
         <form class="header-form">
           <mat-form-field>
@@ -9,20 +9,14 @@
             <input matInput type="text" [formControl]="searchFormControl" />
           </mat-form-field>
         </form>
-        <app-button (click)="toggleFilters()"
-          ><mat-icon>sort</mat-icon></app-button
-        >
+        <app-button (click)="toggleFilters()"><mat-icon>sort</mat-icon></app-button>
       </div>
     }
     <div class="header-login-info">
       <div *ngIf="isLoggedIn">
-        <app-button (click)="authService.logout()"
-          ><span>Logout</span></app-button
-        >
+        <app-button (click)="authService.logout()"><span>Logout</span></app-button>
       </div>
-      <app-button [routerLink]="['/favorites']"
-        ><mat-icon>favorite_border</mat-icon></app-button
-      >
+      <app-button [routerLink]="['/favorites']"><mat-icon>favorite_border</mat-icon></app-button>
       <span>Username</span>
       <mat-icon>account_circle</mat-icon>
     </div>
@@ -33,11 +27,13 @@
     <app-button-toggle
       firstButtonValue="date asc"
       secondButtonValue="date desc"
-      (valueToggle)="sort($any($event))"></app-button-toggle>
+      (valueToggle)="sort($any($event))"
+    ></app-button-toggle>
     <app-button-toggle
       firstButtonValue="views asc"
       secondButtonValue="views desc"
-      (valueToggle)="sort($any($event))"></app-button-toggle>
+      (valueToggle)="sort($any($event))"
+    ></app-button-toggle>
     <div>
       <span>by word or sentence:</span>
       <mat-form-field>
