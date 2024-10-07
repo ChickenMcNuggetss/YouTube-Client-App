@@ -21,6 +21,7 @@ describe('HeaderComponent', () => {
 
   const authServiceMock = {
     isLoggedIn: jest.fn(),
+    userName: jest.fn(),
     submitLoginForm: jest.fn(),
     toggleUserState: jest.fn(),
     logout: jest.fn(),

@@ -1,8 +1,10 @@
 import { VideoInfo } from '@core/interfaces/video-info';
+import { defineSortCriteria } from '@core/utils/define-sort-criteria';
+import { setSortValue } from '@core/utils/setSortValue';
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  addCard, addToFavorites, deleteCard, deleteFromFavorites, searchVideo, videosLoaded,
+  addCard, addToFavorites, deleteCard, deleteFromFavorites, searchVideo, sortVideos, videosLoaded,
   videosLoadingError
 } from '../actions/videos.actions';
 import { Card } from '../interfaces/card';
@@ -41,6 +43,19 @@ export const videosReducer = createReducer(
     ...state,
     youtubeVideos: content.items
   })),
+  on(sortVideos, (state, { sortOrder, sortBy }): YoutubeState => ({
+    ...state,
+    youtubeVideos: state.youtubeVideos.slice().sort((a, b) => {
+      const firstCountValue = setSortValue(sortBy, a);
+      const secondCountValue = setSortValue(sortBy, b);
+      return defineSortCriteria({
+        order: sortOrder,
+        firstValue: firstCountValue,
+        secondValue: secondCountValue,
+      });
+    }),
+  })),
+
   on(videosLoadingError, (state, { loadingError }): YoutubeState => ({
     ...state,
     error: loadingError

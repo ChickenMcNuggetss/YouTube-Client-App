@@ -16,9 +16,14 @@
       <div *ngIf="isLoggedIn">
         <app-button (click)="authService.logout()"><span>Logout</span></app-button>
       </div>
-      <app-button [routerLink]="['/favorites']"><mat-icon>favorite_border</mat-icon></app-button>
-      <span>Username</span>
-      <mat-icon>account_circle</mat-icon>
+      @let userName = getUserName();
+      @if (userName !== null) {
+        <app-button [routerLink]="['/favorites']"><mat-icon>favorite_border</mat-icon></app-button>
+        <span>
+          {{ userName }}
+        </span>
+        <mat-icon>account_circle</mat-icon>
+      }
     </div>
   </div>
 

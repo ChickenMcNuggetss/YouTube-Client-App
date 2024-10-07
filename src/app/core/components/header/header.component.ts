@@ -1,6 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import {
-  Component, OnDestroy, OnInit
+  Component, computed, OnDestroy, OnInit
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public sortFormControl = new FormControl('');
   private subscription: Subscription = new Subscription();
   public isLoggedIn = this.authService.isLoggedIn();
+  public getUserName = computed(() => this.authService.userName());
 
   constructor(
     protected videosService: VideosService,

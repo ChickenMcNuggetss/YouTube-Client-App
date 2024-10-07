@@ -12,6 +12,8 @@ export class AuthService {
   };
   private readonly _isLoggedIn = signal(false);
   public isLoggedIn = this._isLoggedIn.asReadonly();
+  private readonly _userName = signal<string | null>(null);
+  public userName = this._userName.asReadonly();
 
   constructor(
     private router: Router,
@@ -28,8 +30,13 @@ export class AuthService {
     this.loginData = { login, password };
     if (!this.loginData.login) return;
     this.storageService.set('authToken', this.loginData.login);
+    this.setUserName(this.loginData.login);
     this.toggleUserState();
     this.router.navigate(['main']);
+  }
+
+  public setUserName(userName: string) {
+    this._userName.set(userName);
   }
 
   protected toggleUserState() {

@@ -12,10 +12,9 @@ describe('MainPageComponent', () => {
 
   const videosServiceMock = {
     isSearchActive: jest.fn(),
+    sortValue: '',
     setVideosValue: jest.fn(),
     toggleSearchFieldStatus: jest.fn(),
-    sortByView: jest.fn(),
-    sortByDate: jest.fn(),
     sortBy: jest.fn(),
     setSortValue: jest.fn(),
     getVideo: jest.fn(),
