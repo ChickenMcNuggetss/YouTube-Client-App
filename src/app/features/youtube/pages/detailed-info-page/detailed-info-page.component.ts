@@ -1,5 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Snippet, Statistics } from '@core/interfaces/video-info';
@@ -9,7 +11,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 @Component({
   selector: 'app-detailed-info-page',
   standalone: true,
-  imports: [MatIconModule, DatePipe, ButtonComponent],
+  imports: [MatIconModule, DatePipe, ButtonComponent, MatCardModule, MatButtonModule],
   templateUrl: './detailed-info-page.component.html',
   styleUrl: './detailed-info-page.component.scss',
 })
