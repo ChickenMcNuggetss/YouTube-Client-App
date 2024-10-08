@@ -66,6 +66,6 @@ export const videosReducer = createReducer(
   })),
   on(deleteFromFavorites, (state, { id }): YoutubeState => ({
     ...state,
-    favoritesList: state.favoritesList.filter((video) => video.id.videoId !== id)
+    favoritesList: state.favoritesList.filter((video) => video.id as unknown as string !== id)
   }))
 );

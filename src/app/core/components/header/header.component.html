@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header-container">
-    <app-logo />
+    <button mat-button [routerLink]="['/main']"><app-logo /></button>
     @if (videosService.isSearchActive()) {
       <div class="header-search-container">
         <form class="header-form">

@@ -63,7 +63,7 @@ export class CardItemComponent implements OnInit {
   addToFavorite() {
     if (this.isFavoriteVideo) {
       this.isFavoriteVideo = !this.isFavoriteVideo;
-      this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id.videoId }));
+      this.store.dispatch(deleteFromFavorites({ id: this.cardItem.id as unknown as string }));
     } else {
       this.isFavoriteVideo = !this.isFavoriteVideo;
       this.store.dispatch(addToFavorites({ content: this.cardItem }));
