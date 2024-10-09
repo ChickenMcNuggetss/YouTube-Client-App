@@ -19,10 +19,7 @@ export class VideosEffects {
         action: { searchValue: string, type: string }
       ) => this.youtubeApiService.searchVideos(action.searchValue)
     ),
-    map((videos) => {
-      this.videosService.setVideosValue(videos.items);
-      return videosLoaded(({ content: videos }));
-    }),
+    map((videos) => videosLoaded(({ content: videos }))),
     catchError((loadingError) => of(videosLoadingError({ loadingError })))
   ));
 

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { YoutubeApiService } from '@features/youtube/services/api/youtube-api.service';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable } from 'rxjs';
 
 import { VideosEffects } from './videos.effects';
@@ -18,6 +19,7 @@ describe('VideosEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         VideosEffects,
+        provideMockStore(),
         provideMockActions(() => actions$),
         { provide: YoutubeApiService, useValue: youtubeApiServiceMock }
       ]

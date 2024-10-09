@@ -29,6 +29,11 @@ export const searchVideo = createAction(
   props<{ searchValue: string }>()
 );
 
+export const sortVideos = createAction(
+  YoutubeActions.SortVideos,
+  props<{ sortOrder: number, sortBy: string }>()
+);
+
 export const addToFavorites = createAction(
   YoutubeActions.AddToFavorites,
   props<{ content: VideoInfo }>()

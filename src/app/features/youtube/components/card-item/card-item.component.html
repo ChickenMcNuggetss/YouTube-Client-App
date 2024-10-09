@@ -1,7 +1,7 @@
 <mat-card appearance="outlined" class="app-card" [ngStyle]="{ 'border-bottom': borderColor }">
   <img mat-card-image [src]="cardItem.snippet.thumbnails.high.url" [alt]="cardItem.snippet.title" />
-  <mat-card-header>
-    <mat-card-title>{{ cardItem.snippet.title }}</mat-card-title>
+  <mat-card-header class="header">
+    <mat-card-title class="title">{{ cardItem.snippet.title }}</mat-card-title>
     <app-button (click)="addToFavorite()">
       @if (!isFavoriteVideo) {
         <mat-icon>favorite_border</mat-icon>
@@ -16,9 +16,6 @@
     </div>
     <div class="video-statistics-item">
       <mat-icon>thumb_up</mat-icon><span>{{ cardItem.statistics.likeCount }}</span>
-    </div>
-    <div class="video-statistics-item">
-      <mat-icon>thumb_down</mat-icon><span>{{ cardItem.statistics.dislikeCount }}</span>
     </div>
     <div class="video-statistics-item">
       <mat-icon>comment</mat-icon><span>{{ cardItem.statistics.commentCount }}</span>

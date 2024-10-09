@@ -12,7 +12,6 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      // eslint-disable-next-line max-len
       providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting(), provideMockStore()],
     }).compileComponents();
 

@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { Statistics, ThumbnailVariant } from '@core/interfaces/video-info';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { DetailedInfoPageComponent } from './detailed-info-page.component';
 
@@ -47,7 +48,7 @@ describe('DetailedInfoPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DetailedInfoPageComponent],
-      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting(), provideMockStore()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DetailedInfoPageComponent);
