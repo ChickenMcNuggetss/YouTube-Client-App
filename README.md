@@ -35,13 +35,11 @@ The YouTubeClientApp is a application that interacts with the YouTube Data API t
 
 - **lint**: Lints TypeScript and HTML files in the `src` folder using `eslint "./src/**/*.{ts,html}"`.
 
-- **lint:fix**: Automatically fixes linting issues in TypeScript and HTML files using `eslint "./src/**/*.{ts,html}" --fix`.
+- **lint fix**: Automatically fixes linting issues in TypeScript and HTML files using `eslint "./src/**/*.{ts,html}" --fix`.
 
 - **format**: Formats the project files in the `src` folder using `prettier --write .` to ensure consistent code style.
 
 - **test**: Executes tests with `jest --no-cache`, providing detailed output of test results.
-
-- **test:ci**: Runs tests in continuous integration mode using `jest` without verbose output.
 
 - **test:watch**: Runs `jest --watch` to continuously watch and re-run tests when files change.
 
