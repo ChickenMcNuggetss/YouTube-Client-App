@@ -47,7 +47,7 @@ The YouTubeClientApp is a application that interacts with the YouTube Data API t
 
 # Setup and Running ⚙️
 
-What do you need to do to run our project locally?
+What do you need to do to run this project locally?
 
 1. Use node `20.x` or higher.
 2. Install `Git` on your computer.
